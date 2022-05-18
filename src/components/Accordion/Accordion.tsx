@@ -1,37 +1,54 @@
 import React from "react";
 
-const Accordion = () => {
+type AccordionPropsType = {
+    title: string,
+    isCollapsed: boolean
+}
+
+const Accordion = (props: AccordionPropsType) => {
 
     console.log('Accordion rendering');
-    
-    return (
-      <div>
-        <AccordionTitle/>
-        <AccordionBody/>
-      </div>
-    )
-  }
-  
-  
-  const AccordionTitle = () => {
-    console.log('AccordionTitle rendering');
-    return(
-      <h3>This is accordion title text</h3>
-    )
-  }
-  
-  
-  const AccordionBody = () => {
-    console.log('AccordionBody rendering');
-    return(
-      <div>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul>
-      </div>
-    )
-  }
+    if(props.isCollapsed === false){
+        return (
+            <div>
+                <AccordionTitle title={props.title}/>
+                <AccordionBody/>
+            </div>
+        )
+    }
+    else{
+        return(
+            <div>
+                <AccordionTitle title={props.title}/>
+            </div>
+        )
+    }
+   
+}
 
-  export default Accordion;
+type AccordionTitleType = {
+    title: string
+}
+
+const AccordionTitle = (props: AccordionTitleType) => {
+    console.log('AccordionTitle rendering');
+    return (
+        <h3>{props.title}</h3>
+    )
+}
+
+
+const AccordionBody = () => {
+    console.log('AccordionBody rendering');
+    return (
+        <div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+    )
+}
+
+export default Accordion;
