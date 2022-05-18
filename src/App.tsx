@@ -8,8 +8,21 @@ const App = () => {
     <div>
       <Header />
       <Technologies />
+      <div>
+        <Star />
+        <Star />
+        <Star />
+        <Star />
+        <Star />
+      </div>
     </div>
   );
+}
+
+const Star = () => {
+  return(
+    <div>Star</div> 
+  )
 }
 
 
