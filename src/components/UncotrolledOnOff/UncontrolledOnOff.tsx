@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import s from './OnOff.module.css'
+import s from './UncotrolledOnOff.module.css'
 
 
-export const OnOff = () => {
+export const UncontrolledOnOff = () => {
     let [IsOn, setIsOn] = useState(false)
 
 

@@ -1,39 +1,28 @@
-import React from "react";
+import React from 'react';
 
 type AccordionPropsType = {
     title: string,
-    isCollapsed: boolean
+    accordionCollapsed: boolean
+    onClick: (accordionCollapsed: boolean) => void
 }
 
 const Accordion = (props: AccordionPropsType) => {
-
-    console.log('Accordion rendering');
-    if(props.isCollapsed === false){
-        return (
-            <div>
-                <AccordionTitle title={props.title}/>
-                <AccordionBody/>
-            </div>
-        )
-    }
-    else{
-        return(
-            <div>
-                <AccordionTitle title={props.title}/>
-            </div>
-        )
-    }
-   
+    return <div>
+        <AccordionTitle title={props.title} onClick={() => props.onClick(!props.accordionCollapsed)}/>
+        {!props.accordionCollapsed ? <AccordionBody/> : ''}
+    </div>
 }
 
 type AccordionTitleType = {
     title: string
+    onClick: () => void
+
 }
 
 const AccordionTitle = (props: AccordionTitleType) => {
     console.log('AccordionTitle rendering');
     return (
-        <h3>{props.title}</h3>
+        <h3 onClick={props.onClick}>{props.title}</h3>
     )
 }
 

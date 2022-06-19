@@ -6,30 +6,29 @@ type AccordionPropsType = {
 
 export const SelfContrAccordion = (props: AccordionPropsType) => {
 
-    let [isCollapsed,setIsCollapsed] = useState(false)
+    let [isCollapsed, setIsCollapsed] = useState(false)
 
     console.log('Accordion rendering');
 
-        return (
-            <div>
-                <AccordionTitle title={props.title}/>
-                <button onClick={()=>{setIsCollapsed(!isCollapsed)}}>TOGGLE</button>
-                {!isCollapsed && <AccordionBody/>}
-            </div>
-        )
+    return (
+        <div>
+            <AccordionTitle title={props.title} onClick={() => setIsCollapsed(!isCollapsed)}/>
+            {!isCollapsed && <AccordionBody/>}
+        </div>
+    )
 
 
-   
 }
 
 type AccordionTitleType = {
     title: string
+    onClick: () => void
 }
 
 const AccordionTitle = (props: AccordionTitleType) => {
     console.log('AccordionTitle rendering');
     return (
-        <h3>{props.title}</h3>
+        <h3 onClick={()=>props.onClick()}>{props.title}</h3>
     )
 }
 
