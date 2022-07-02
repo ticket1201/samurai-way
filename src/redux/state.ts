@@ -1,3 +1,6 @@
+import {profileReducer, profileReducerActionsTypes} from './profile-reducer';
+import {dialogsReducer, dialogsReducerActionsTypes} from './dialogs-reducer';
+
 export type storeType = {
     _state: stateType
     _onChange: () => void
@@ -14,7 +17,7 @@ export type stateType = {
 
 }
 export type PostsType = PostItemStateType[]
-type PostItemStateType = {
+export type PostItemStateType = {
     id: number
     message: string
     likeCount: number
@@ -33,26 +36,10 @@ type MessageItemType = {
     message: string
     time: string
 }
-type AddPostActionType = {
-    type: 'ADD-POST'
-    postText: string
-}
-type UpdateNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE_NEW_MESSAGE_TEXT'
-    text: string
-}
-type SendMessageTextActionType = {
-    type: 'SEND_MESSAGE'
-}
-export type ActionsTypes =
-    AddPostActionType
-    | UpdateNewTextActionType
-    | UpdateNewMessageTextActionType
-    | SendMessageTextActionType
+
+
+
+export type ActionsTypes = profileReducerActionsTypes | dialogsReducerActionsTypes
 
 const store: storeType = {
     _state: {
@@ -94,45 +81,14 @@ const store: storeType = {
         this._onChange = callback
     },
 
-    dispatch(action) { //{type : 'ADD-POST'}
-        if (action.type === 'ADD-POST') {
-            let newPost: PostItemStateType = {
-                id: 5,
-                message: action.postText,
-                likeCount: 0
-            }
-            this._state.profilePage.posts = [newPost, ...this._state.profilePage.posts]
-            this._state.profilePage.messageForNewPost = '';
-            this._onChange()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange()
-        } else if (action.type === 'UPDATE_NEW_MESSAGE_TEXT') {
-            this._state.dialogsPage.newMessageText = action.text;
-            this._onChange()
-        } else if (action.type === 'SEND_MESSAGE') {
-            const message = this._state.dialogsPage.newMessageText
-            this._state.dialogsPage.newMessageText = ''
-            this._state.dialogsPage.messages = [...this._state.dialogsPage.messages, {id: 6, message: message, time: `${new Date().getHours()}:${new Date().getMinutes()}`}]
-            this._onChange()
-        }
+    dispatch(action) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._onChange()
     }
 }
 
-export const addPostActionCreator = (postText: string): AddPostActionType => {
-    return {
-        type: 'ADD-POST',
-        postText: postText
-    }
-}
-export const updateNewPostTextActionCreator = (text: string): UpdateNewTextActionType => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: text}
-}
-export const sendMessageActionCreator = ():SendMessageTextActionType =>{
-    return {type: 'SEND_MESSAGE'}
-}
-export const updateNewMessageTextActionCreator = (message:string):UpdateNewMessageTextActionType =>{
-    return {type: 'UPDATE_NEW_MESSAGE_TEXT', text:message}
-}
+
+
 
 export default store
