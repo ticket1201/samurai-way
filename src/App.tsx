@@ -19,8 +19,8 @@ const App = (props: AppPropsType) => {
         <div className={'app-wrapper'}>
             <Header/>
             <div className={'content'}>
-                <Route path={'/dialogs'} render={() => <Dialogs dialogsState={props.store.getState().dialogsPage}/>}/>
-                <Route path={'/profile'} render={() => <Profile postsState={props.store.getState().profilePage.posts} addPost={props.store.addPost.bind(props.store)} newMessage={props.store.getState().profilePage.messageForNewPost} changeNewText={props.store.changeNewText.bind(props.store)}/>}/>
+                <Route path={'/dialogs'} render={() => <Dialogs dialogsState={props.store.getState().dialogsPage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                <Route path={'/profile'} render={() => <Profile postsState={props.store.getState().profilePage.posts} dispatch={props.store.dispatch.bind(props.store)} newMessage={props.store.getState().profilePage.messageForNewPost}/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>

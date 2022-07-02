@@ -16,20 +16,27 @@
   flex-direction: column;
   padding: 30px;
 
-  .newMessage{
+  .newMessage {
     display: grid;
     grid-gap: 15px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 5fr 1fr;
     grid-template-areas:
             "text text text text text"
-              ". . . . button" ;
+              ". . . . button";
 
-    & textarea{
+    & textarea {
       border-radius: 10px;
       grid-area: text;
+      padding: 10px;
+
+      &:focus {
+        outline: 2px solid orange;
+      }
     }
-    & button{
+
+
+    & button {
       grid-area: button;
       border-radius: 5px;
       border: 1px solid gray;
