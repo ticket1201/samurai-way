@@ -1,0 +1,24 @@
+.selected{
+    width: 7rem;
+    height: 2rem;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.selected:after{
+    position: absolute;
+    content: '>';
+    font-weight: bolder;
+    font-size: 1.25rem;
+    right: 2px;
+    top: 5px;
+}
+
+.close{
+    display: none;
+}
+.open{
+    display: block;
+}

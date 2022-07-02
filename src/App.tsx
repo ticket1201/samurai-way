@@ -41,7 +41,7 @@ const App = () => {
             <OnOff/>
             <UncontrolledOnOff/>*/}
             <OnOff IsOn={onOffValue} setIsOn={setonOffValue}/>
-            <Accordion title = {'This is an Accordion title'} accordionCollapsed={accordionCollapsed} onClick = {setAccordionCollapsed}/>
+            <Accordion items={[]} onClick={()=>{}} title = {'This is an Accordion title'} accordionCollapsed={accordionCollapsed} onChange= {setAccordionCollapsed}/>
         </div>
     );
 }
