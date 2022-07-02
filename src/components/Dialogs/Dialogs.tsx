@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.scss'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {DialogsPageType} from '../../redux/state';
+import {
+    ActionsTypes,
+    DialogsPageType,
+    sendMessageActionCreator,
+    updateNewMessageTextActionCreator
+} from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogsState: DialogsPageType
+    dispatch: (action: ActionsTypes) => void
 }
 
 
@@ -19,16 +25,22 @@ export const Dialogs = (props: DialogsPropsType) => {
     const messagesElements = props.dialogsState.messages
         .map(message => <Message message={message.message} time={message.time}/>)
 
-    const sendMessage = () => {
-        if(newMessage.current){
-            let text = newMessage.current.value;
-            alert(text)
-            newMessage.current.value = '';
+    let newMessageText = props.dialogsState.newMessageText
+
+    const onClickMessageHandler = () => {
+        if(props.dialogsState.newMessageText){
+            props.dispatch(sendMessageActionCreator())
         }
 
     }
 
-    let newMessage = React.createRef<HTMLTextAreaElement>()
+    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value
+        props.dispatch(updateNewMessageTextActionCreator(text))
+
+
+    }
+
 
     return (
         <div className={s.dialogs}>
@@ -38,8 +50,9 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesElements}
                 <div className={s.newMessage}>
-                    <textarea name="" id="" ref={newMessage}></textarea>
-                    <button onClick={sendMessage}>Send</button>
+                    <textarea name="" id="" placeholder={'Enter your message'}
+                              onChange={onChangeMessageHandler} value={newMessageText}></textarea>
+                    <button onClick={onClickMessageHandler}>Send</button>
                 </div>
             </div>
         </div>
