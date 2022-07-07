@@ -13,23 +13,26 @@ export type SelectPropsType = {
 }
 
 const Select = (props: SelectPropsType) => {
-    const findItem = props.items.filter(el => el.value === props.value || el.title === props.value)[0].title
+    const selectedItem = props.items.find(el => el.value === props.value || el.title === props.value)
 
-    const [isOpen,setIsOpen] = useState<string>(s.close)
+    const [isOpen,setIsOpen] = useState<boolean>(false)
 
-    const onclickHandler = () => {
-        if(isOpen === s.close){
-            setIsOpen(s.open)
-        }
-        else setIsOpen(s.close)
+    const toggleItems = () =>  setIsOpen(!isOpen)
+
+    const onItemClick = (value:any) => {
+        props.onChange(value)
+        toggleItems()
     }
-
-
 
     return (
         <div>
-            <div className={s.selected} onClick={onclickHandler}>{findItem}</div>
-            {props.items.map((i, index) => <div className={isOpen} key={index} onChange={ () => props.onChange(i.value) }>{i.title}</div>)}
+            <span className={s.selected} onClick={toggleItems}>
+                {selectedItem && selectedItem.title}
+            </span>
+            {isOpen &&
+                props.items.map((i, index) => <div className={s.item} key={index} onClick={()=>onItemClick(i.value)}>
+                {i.title}
+            </div>)}
         </div>
     );
 };
