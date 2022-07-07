@@ -20,7 +20,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
         .map(post => <Post message={post.message} likeCount={post.likeCount} key={post.id}/>)
 
     const onAddPost = () => {
-        props.addPost()
+        if(props.newMessage){
+            props.addPost()
+        }
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
