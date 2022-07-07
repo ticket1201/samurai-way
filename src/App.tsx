@@ -36,12 +36,13 @@ const App = () => {
             <Rating value={4}/>
             <Rating value={ratingValue} onClick = {setRatingValue}/>
             <SelfContrAccordion title={'menu'}/>
-            <SelfContrAccordion title={'users'}/>
+
             <UncontrolledRating/>
             <OnOff/>
             <UncontrolledOnOff/>*/}
-            <OnOff IsOn={onOffValue} setIsOn={setonOffValue}/>
-            <Accordion items={[]} onClick={()=>{}} title = {'This is an Accordion title'} accordionCollapsed={accordionCollapsed} onChange= {setAccordionCollapsed}/>
+            <SelfContrAccordion title={'users'}/>
+          {/*  <OnOff IsOn={onOffValue} setIsOn={setonOffValue}/>
+            <Accordion items={[]} onClick={()=>{}} title = {'This is an Accordion title'} accordionCollapsed={accordionCollapsed} onChange= {setAccordionCollapsed}/>*/}
         </div>
     );
 }
