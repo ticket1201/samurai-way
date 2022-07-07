@@ -2,17 +2,13 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.scss'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {
-    ActionsTypes,
-    DialogsPageType,
-    sendMessageActionCreator,
-    updateNewMessageTextActionCreator
-} from '../../redux/state';
+import {DialogsPageType} from '../../redux/store';
 
 
 type DialogsPropsType = {
     dialogsState: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    updateNewMessageBody: (text: string) => void
+    onSendMessage: () => void
 }
 
 
@@ -28,17 +24,15 @@ export const Dialogs = (props: DialogsPropsType) => {
     let newMessageText = props.dialogsState.newMessageText
 
     const onClickMessageHandler = () => {
-        if(props.dialogsState.newMessageText){
-            props.dispatch(sendMessageActionCreator())
+        if (props.dialogsState.newMessageText) {
+            props.onSendMessage()
         }
 
     }
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(updateNewMessageTextActionCreator(text))
-
-
+        props.updateNewMessageBody(text)
     }
 
 
