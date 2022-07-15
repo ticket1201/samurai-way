@@ -1,26 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.scss'
 import {Post} from './Post/Post';
-import {PostItemStateType} from '../../../redux/store';
-
-
-
-export type MyPostsPropsType = {
-    posts: PostItemStateType[]
-    addPost: () => void
-    updateNewPostText: (newMessage: string) => void
-    newMessage: string
-}
+import {MyPostsPropsType} from './MyPostsContainer';
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
-
 
     const postsElements = props.posts
         .map(post => <Post message={post.message} likeCount={post.likeCount} key={post.id}/>)
 
     const onAddPost = () => {
-        if(props.newMessage){
+        if (props.messageForNewPost) {
             props.addPost()
         }
     }
@@ -34,7 +24,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <div className={s.posts}>
             <h3>My posts</h3>
             <div className={s.addPost}>
-                <textarea name="" id="" value={props.newMessage} onChange={onPostChange}></textarea>
+                <textarea name="" id="" value={props.messageForNewPost} onChange={onPostChange}></textarea>
                 <button onClick={onAddPost}>Submit</button>
             </div>
             <div className={'posts'}>
