@@ -2,43 +2,29 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.scss'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {
-    ActionsTypes,
-    DialogsPageType,
-    sendMessageActionCreator,
-    updateNewMessageTextActionCreator
-} from '../../redux/state';
-
-
-type DialogsPropsType = {
-    dialogsState: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
-}
+import {DialogsPropsType} from './DialogsContainer';
 
 
 export const Dialogs = (props: DialogsPropsType) => {
 
+    const dialogsElements = props.names
+        .map(dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
-    const dialogsElements = props.dialogsState.names
-        .map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    const messagesElements = props.messages
+        .map(message => <Message message={message.message} time={message.time} key={message.id}/>)
 
-    const messagesElements = props.dialogsState.messages
-        .map(message => <Message message={message.message} time={message.time}/>)
-
-    let newMessageText = props.dialogsState.newMessageText
+    let newMessageText = props.newMessageText
 
     const onClickMessageHandler = () => {
-        if(props.dialogsState.newMessageText){
-            props.dispatch(sendMessageActionCreator())
+        if (props.newMessageText) {
+            props.onSendMessage()
         }
 
     }
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.dispatch(updateNewMessageTextActionCreator(text))
-
-
+        props.updateNewMessageBody(text)
     }
 
 
