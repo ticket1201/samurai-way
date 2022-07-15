@@ -1,0 +1,61 @@
+.pageTitle{
+  margin-left: 13%;
+}
+
+.usersWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.ImageWrapper {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  & img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+
+}
+
+.userInfo{
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  border: 2px solid lightslategrey;
+  border-radius: 15px;
+
+  & .userTitle{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    & h3{
+      margin: 0;
+    }
+    & p{
+      margin: 0;
+    }
+  }
+
+  & .userLocation{
+    text-align: right;
+    & h3{
+      margin: 10px 0;
+    }
+  }
+
+}
