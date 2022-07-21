@@ -1,14 +1,14 @@
-type UserLocationType = {
-    city: string
-    country: string
+type UserPhotosType = {
+    small: string
+    large: string
 }
 export type UserType = {
+    name: string
     id: string
-    followed: boolean
-    fullName: string
-    photoURL: string
+    uniqueUrlName: string
+    photos: UserPhotosType
     status: string
-    location: UserLocationType
+    followed: boolean
 }
 export type UsersType = {
     users: Array<UserType>
@@ -25,7 +25,7 @@ const initialState: UsersType = {
 }
 
 
-export const usersReducer = (state = initialState, action: usersACsTypes):UsersType => {
+export const usersReducer = (state = initialState, action: usersACsTypes): UsersType => {
     switch (action.type) {
         case ('FOLLOW'): {
             return {
@@ -64,5 +64,5 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET_USERS',
         payload: {users}
-    }  as const
+    } as const
 }
