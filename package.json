@@ -4,6 +4,14 @@
   "private": true,
   "homepage": "https://ticket1201.github.io/samurai-way",
   "dependencies": {
+    "@types/node": "16.7.13",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "@types/react-redux": "7.1.22",
+    "@types/react-router-dom": "5.3.3",
+    "@types/react-test-renderer": "17.0.1",
+    "@types/redux-form": "8.3.3",
+    "@types/uuid": "8.3.4",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
     "@testing-library/user-event": "13.2.1",
@@ -53,23 +61,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/node": "16.7.13",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2",
-    "@types/react-redux": "7.1.22",
-    "@types/react-router-dom": "5.3.3",
-    "@types/react-test-renderer": "17.0.1",
-    "@types/redux-form": "8.3.3",
-    "@types/uuid": "8.3.4"
-  },
-  "resolutions": {
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2"
-  },
-  "overrides": {
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.2"
   }
 }
