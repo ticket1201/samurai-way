@@ -1,14 +1,22 @@
 .main {
-    display: grid;
-    grid-template-areas:
+  display: grid;
+  grid-template-areas:
     "info info info info"
     "contacts posts posts posts";
-    background-color: lightblue;
-    width: inherit;
-    align-items: center;
-
+  background-color: lightblue;
+  width: inherit;
+  align-items: center;
 }
 
-.main img{
-    width: 100%;
+.main img {
+  width: 100%;
+}
+
+.plug {
+  grid-area: contacts;
+  align-self: start;
+  min-width: 268px;
+  font-size: 1.17em;
+  margin: 25px 15px;
+  font-weight: bold;
 }
