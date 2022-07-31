@@ -18,12 +18,13 @@ export type UsersType = {
     isFetching: boolean
 }
 
-export type usersACsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType;
-type followACType = ReturnType<typeof followAC>
-type unfollowACType = ReturnType<typeof unfollowAC>
-type setUsersACType = ReturnType<typeof setUsersAC>
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+export type usersACsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType;
+type followACType = ReturnType<typeof follow>
+type unfollowACType = ReturnType<typeof unfollow>
+type setUsersACType = ReturnType<typeof setUsers>
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 
 
 const initialState: UsersType = {
@@ -37,25 +38,25 @@ const initialState: UsersType = {
 
 export const usersReducer = (state = initialState, action: usersACsTypes): UsersType => {
     switch (action.type) {
-        case ('FOLLOW'): {
+        case 'FOLLOW': {
             return {
                 ...state,
                 users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: true} : el)
             }
         }
-        case ('UNFOLLOW'): {
+        case 'UNFOLLOW': {
             return {
                 ...state,
                 users: state.users.map(el => el.id === action.payload.userID ? {...el, followed: false} : el)
             }
         }
-        case ('SET_USERS'): {
+        case 'SET_USERS': {
             return {...state, users: action.payload.users}
         }
-        case ('SET_CURRENT_PAGE'): {
+        case 'SET_CURRENT_PAGE': {
             return {...state, currentPage: action.payload.currentPage}
         }
-        case ('SET_TOTAL_COUNT'):{
+        case 'SET_TOTAL_COUNT':{
             return {...state, totalUserCount: action.payload.count}
         }
         case 'TOGGLE_IS_FETCHING':{
@@ -67,33 +68,33 @@ export const usersReducer = (state = initialState, action: usersACsTypes): Users
 }
 
 
-export const followAC = (userID: string) => {
+export const follow = (userID: string) => {
     return {
         type: 'FOLLOW',
         payload: {userID}
     } as const
 }
-export const unfollowAC = (userID: string) => {
+export const unfollow = (userID: string) => {
     return {
         type: 'UNFOLLOW',
         payload: {userID}
     } as const
 }
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: 'SET_USERS',
         payload: {users}
     } as const
 }
 
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         payload: {currentPage}
     } as const
 }
 
-export const setTotalUsersCountAC = (count: number) => {
+export const setTotalUsersCount = (count: number) => {
     return {
         type: 'SET_TOTAL_COUNT',
         payload: {count}
