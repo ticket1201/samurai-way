@@ -1,7 +1,8 @@
-
 .main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+    "info info info info"
+    "contacts posts posts posts";
     background-color: lightblue;
     width: inherit;
     align-items: center;
