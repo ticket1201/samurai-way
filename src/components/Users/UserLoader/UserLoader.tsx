@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../users.module.scss';
 
-export const UserPreloader = () => {
+export const UserLoader = () => {
     return (
         <div className={`${s.user} ${s.blink}`}>
             <div className={s.ImageWrapper}>
