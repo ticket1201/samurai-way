@@ -15,6 +15,7 @@ export type UsersType = {
     pageSize: number
     totalUserCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type usersACsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType;
@@ -29,7 +30,8 @@ const initialState: UsersType = {
     users: [],
     pageSize: 4,
     totalUserCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -55,6 +57,9 @@ export const usersReducer = (state = initialState, action: usersACsTypes): Users
         }
         case ('SET_TOTAL_COUNT'):{
             return {...state, totalUserCount: action.payload.count}
+        }
+        case 'TOGGLE_IS_FETCHING':{
+            return {...state, isFetching: action.isFetching}
         }
         default :
             return state
@@ -92,5 +97,12 @@ export const setTotalUsersCountAC = (count: number) => {
     return {
         type: 'SET_TOTAL_COUNT',
         payload: {count}
+    } as const
+}
+
+export const toggleIsFetching = (isFetching:boolean) => {
+    return {
+        type: 'TOGGLE_IS_FETCHING',
+        isFetching
     } as const
 }
