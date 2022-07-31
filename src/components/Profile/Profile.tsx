@@ -14,7 +14,9 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={styles.main}>
             <ProfileInfo profile={props.profile}/>
-            {props.profile?.contacts && <Contacts profileContacts={props.profile.contacts}/>}
+            {props.profile
+                ? <Contacts profileContacts={props.profile.contacts}/>
+                : <div className={styles.plug}> Loading </div>}
             <MyPostsContainer/>
         </div>
     )
