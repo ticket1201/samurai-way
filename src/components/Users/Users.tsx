@@ -2,7 +2,7 @@ import React from 'react';
 import s from './users.module.scss';
 import defaultAvatar from './../../assets/images/default_avatar.png'
 import {UsersType} from '../../redux/users-reducer';
-import {UserPreloader} from './UserLoader/UserPreloader';
+import {UserLoader} from './UserLoader/UserLoader';
 import {Pagination} from './Pagination/Pagination';
 import {NavLink} from 'react-router-dom';
 
@@ -20,10 +20,10 @@ export const Users = (props: UsersPropsType) => {
             <div className={s.usersWrapper}>
                 {props.isFetching
                     ? <>
-                        <UserPreloader/>
-                        <UserPreloader/>
-                        <UserPreloader/>
-                        <UserPreloader/>
+                        <UserLoader/>
+                        <UserLoader/>
+                        <UserLoader/>
+                        <UserLoader/>
                         <Pagination pageSize={props.pageSize} onPageChanged={props.onPageChanged} currentPage={props.currentPage} totalUserCount={props.totalUserCount}/>
                     </>
                     : <>
@@ -37,7 +37,7 @@ export const Users = (props: UsersPropsType) => {
                                         ? <button onClick={() => props.unfollow(el.id)}>Unfollow</button>
                                         : <button onClick={() => props.follow(el.id)}>Follow</button>}
                                 </div>
-                                <div className={s.userInfo}>
+                                <NavLink className={s.userInfo} to={`/profile/${el.id}`}>
                                     <div className={s.userTitle}>
                                         <h3>{el.name}</h3>
                                         <p>{el.status}</p>
@@ -46,7 +46,7 @@ export const Users = (props: UsersPropsType) => {
                                         <h3>{`country`},</h3>
                                         <h3>{`city`}</h3>
                                     </div>
-                                </div>
+                                </NavLink>
                             </div>)
                         }
                         <Pagination pageSize={props.pageSize} onPageChanged={props.onPageChanged} currentPage={props.currentPage} totalUserCount={props.totalUserCount}/>
