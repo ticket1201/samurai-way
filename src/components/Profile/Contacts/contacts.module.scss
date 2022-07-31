@@ -1,0 +1,20 @@
+.contacts{
+  grid-area: contacts;
+  align-self: start;
+  margin: 15px 25px;
+
+
+  & .contactsLinks{
+    display: grid;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0 15px;
+    & p{
+      font-weight: bold;
+
+      & a{
+        margin-left: 10px;
+      }
+    }
+  }
+}
