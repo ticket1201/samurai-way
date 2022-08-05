@@ -1,12 +1,12 @@
 import React from 'react';
-import {Nav} from './Navbar/Navbar';
-import styles from './Header.module.scss';
+import s from './Header.module.scss';
+import NavBarContainer from './Navbar/NavBarContainer';
 
 export const Header = () => {
     return(
-        <header className={styles.header}>
+        <header className={s.header}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Playstation_logo_colour.svg" alt="logo"/>
-            <Nav/>
+            <NavBarContainer/>
         </header>
     )
 }
