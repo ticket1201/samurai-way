@@ -1,12 +1,12 @@
 import React from 'react';
 import {Nav} from './Navbar';
-import axios from 'axios';
 import {connect} from 'react-redux';
 import {
     authType,
     setAuthUserData,
 } from '../../../redux/auth-reducer';
 import {AppStatType} from '../../../redux/redux-store';
+import {usersAPI} from '../../../api/api';
 
 
 export type NavBarContainerType = {
@@ -16,12 +16,10 @@ export type NavBarContainerType = {
 
 class NavBarContainer extends React.Component<NavBarContainerType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        })
+        usersAPI.getAuth()
             .then(response => {
-                    if (response.data.resultCode === 0) {
-                        let {id, email, login} = response.data.data
+                    if (response.resultCode === 0) {
+                        let {id, email, login} = response.data
                         this.props.setAuthUserData(id, email, login)
                     }
                 }
