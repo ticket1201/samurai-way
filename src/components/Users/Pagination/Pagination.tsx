@@ -20,8 +20,8 @@ export const Pagination = (props: PaginationPropsType) => {
 
     return (
         <div className={s.pagination}>
-            {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selected : ''}
+            {pages.map((p,i )=> {
+                return <span key={i} className={props.currentPage === p ? s.selected : ''}
                              onClick={() => props.onPageChanged(p)}>{p}</span>
             })}
         </div>
