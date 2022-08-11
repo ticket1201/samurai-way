@@ -1,5 +1,5 @@
 import React from 'react';
-import s from '../users.module.scss';
+import s from '../../users.module.scss';
 
 export const UserLoader = () => {
     return (
