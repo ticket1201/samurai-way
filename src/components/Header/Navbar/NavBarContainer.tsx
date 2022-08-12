@@ -2,28 +2,19 @@ import React from 'react';
 import {Nav} from './Navbar';
 import {connect} from 'react-redux';
 import {
-    authType,
-    setAuthUserData,
+    authType, getAuthUserData,
 } from '../../../redux/auth-reducer';
 import {AppStatType} from '../../../redux/redux-store';
-import {usersAPI} from '../../../api/api';
 
 
 export type NavBarContainerType = {
-    setAuthUserData: (userId: number, email: string, login: string) => void
+    getAuthUserData: () => void
 } & authType
 
 
 class NavBarContainer extends React.Component<NavBarContainerType> {
     componentDidMount() {
-        usersAPI.getAuth()
-            .then(response => {
-                    if (response.resultCode === 0) {
-                        let {id, email, login} = response.data
-                        this.props.setAuthUserData(id, email, login)
-                    }
-                }
-            )
+      this.props.getAuthUserData()
     }
 
     render() {
@@ -38,4 +29,4 @@ const mapStateToProps = (state: AppStatType):authType => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, {setAuthUserData})(NavBarContainer)
+export default connect(mapStateToProps, {getAuthUserData})(NavBarContainer)
