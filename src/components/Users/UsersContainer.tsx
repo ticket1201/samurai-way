@@ -34,13 +34,8 @@ class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType> {
 
 
     render() {
-        return <Users totalUserCount={this.props.totalUserCount} currentPage={this.props.currentPage}
-                      pageSize={this.props.pageSize} users={this.props.users} onPageChanged={this.onPageChanged}
-                      follow={this.props.follow} unfollow={this.props.unfollow}
-                      isFetching={this.props.isFetching}
-                      followingInProgress={this.props.followingInProgress}
-                      toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
-                      followSuccess={this.props.followSuccess} unfollowSuccess={this.props.unfollowSuccess}
+        return <Users {...this.props} {...mapDispatchToProps}
+                      onPageChanged={this.onPageChanged}
         />
     }
 }
@@ -57,9 +52,12 @@ const mapStateToProps = (state: AppStatType): UsersType => {
     }
 }
 
+const mapDispatchToProps = {
+    followSuccess, unfollowSuccess, setCurrentPage,
+    toggleIsFollowingInProgress, getUsers, follow, unfollow
 
-export default connect(mapStateToProps, {
-    followSuccess, unfollowSuccess, setCurrentPage, toggleIsFollowingInProgress, getUsers, follow, unfollow
-})(UsersAPIComponent)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
 
 
