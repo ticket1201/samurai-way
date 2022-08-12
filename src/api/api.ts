@@ -12,8 +12,8 @@ export const usersAPI = {
     getUsers: (currentPage = 1, pageSize = 4) => {
         return axiosInstance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
-    getAuth: () => {
-        return axiosInstance.get(`auth/me`).then(response => response.data)
+    getProfile: (userID: String) => {
+       return  axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
     },
     followUser: (userID: String) => {
         return axiosInstance.post(`follow/${userID}`).then(resolve => resolve.data)
