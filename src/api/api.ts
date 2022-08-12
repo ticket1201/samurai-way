@@ -23,5 +23,9 @@ export const usersAPI = {
     }
 }
 
-
+export const authAPI = {
+    getAuth: () => {
+        return axiosInstance.get(`auth/me`).then(response => response.data)
+    }
+}
 
