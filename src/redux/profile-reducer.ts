@@ -1,4 +1,6 @@
 import {v1} from 'uuid';
+import {usersAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
 export type PostsType = PostItemStateType[]
 export type PostItemStateType = {
@@ -76,6 +78,9 @@ export const profileReducer = (state = initialState, action: profileReducerActio
     }
 }
 
+//ACs
+
+
 export const addPostActionCreator = (): AddPostActionType => {
     return {
         type: 'ADD-POST'
@@ -90,4 +95,13 @@ export const setUserProfile = (profile:ProfilePageType) => {
         type:'SET_USER_PROFILE',
         profile
     } as const
+}
+
+//THUNK
+
+export const getUserProfile = (userID: string) => (dispatch:Dispatch<profileReducerActionsTypes>) => {
+    usersAPI.getProfile(userID)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }
