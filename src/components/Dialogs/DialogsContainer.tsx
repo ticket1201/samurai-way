@@ -1,5 +1,4 @@
 import {
-    DialogsPageType,
     sendMessageActionCreator,
     updateNewMessageTextActionCreator
 } from '../../redux/dialogs-reducer';
@@ -13,11 +12,13 @@ type mapDispatchToPropsType = {
     onSendMessage: () => void
 }
 
-export type DialogsPropsType = mapDispatchToPropsType & DialogsPageType
+export type DialogsPropsType = mapDispatchToPropsType & mapStateToPropsType
+type mapStateToPropsType = ReturnType<typeof mapStateToProps>
 
-const mapStateToProps = (state:AppStatType):DialogsPageType => {
+const mapStateToProps = (state:AppStatType) => {
     return{
-        ...state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
