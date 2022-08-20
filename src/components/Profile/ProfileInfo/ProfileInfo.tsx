@@ -3,6 +3,7 @@ import defaultAvatar from './../../../assets/images/default_avatar.png'
 import s from './ProfileInfo.module.scss'
 import {ProfilePageType} from '../../../redux/profile-reducer';
 import ProfileInfoLoader from './ProfileInfoLoader/ProfileInfoLoader';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 type ProfileInfoType = {
     profile: ProfilePageType | null
@@ -30,6 +31,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                     <h2>{props.profile.fullName}</h2>
                     <p>{props.profile.aboutMe}</p>
                     {props.profile?.lookingForAJob && <p>Ищу работу как: {props.profile?.lookingForAJobDescription}</p>}
+                    <ProfileStatus/>
                 </div>
             </div>
 
