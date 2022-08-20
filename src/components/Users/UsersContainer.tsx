@@ -6,9 +6,11 @@ import {
     toggleIsFollowingInProgress, unfollow, unfollowSuccess,
     UsersType,
 } from '../../redux/users-reducer';
-import {AppStatType} from '../../redux/redux-store';
-import React from 'react';
+import {AppStateType} from '../../redux/redux-store';
+import React, {ComponentType} from 'react';
 import {Users} from './Users';
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
+import {compose} from 'redux';
 
 
 export type mapDispatchToPropsType = {
@@ -41,7 +43,7 @@ class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType> {
 }
 
 
-const mapStateToProps = (state: AppStatType): UsersType => {
+const mapStateToProps = (state: AppStateType): UsersType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -58,6 +60,9 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect)
+(UsersAPIComponent)
 
 
