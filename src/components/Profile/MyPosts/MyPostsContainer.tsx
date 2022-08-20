@@ -5,7 +5,7 @@ import {
 } from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
-import {AppStatType} from '../../../redux/redux-store';
+import {AppStateType} from '../../../redux/redux-store';
 import {Dispatch} from 'redux';
 
 
@@ -21,7 +21,7 @@ type mapDispatchToPropsType = {
 
 export type MyPostsPropsType = mapDispatchToPropsType & mapStateToPropsType
 
-const mapStateToProps = (state: AppStatType): mapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         messageForNewPost: state.profilePage.messageForNewPost

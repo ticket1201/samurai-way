@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {
     authType, getAuthUserData,
 } from '../../../redux/auth-reducer';
-import {AppStatType} from '../../../redux/redux-store';
+import {AppStateType} from '../../../redux/redux-store';
 
 
 export type NavBarContainerType = {
@@ -22,7 +22,7 @@ class NavBarContainer extends React.Component<NavBarContainerType> {
     }
 }
 
-const mapStateToProps = (state: AppStatType):authType => ({
+const mapStateToProps = (state: AppStateType):authType => ({
     id: state.auth.id,
     email: state.auth.email,
     isAuth: state.auth.isAuth,
