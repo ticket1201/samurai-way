@@ -31,7 +31,7 @@ export const Users = (props: UsersPropsType) => {
                                     currentPage={props.currentPage} totalUserCount={props.totalUserCount}/>
                     </>
 
-                };
+                }
             </div>
         </>)
 }
