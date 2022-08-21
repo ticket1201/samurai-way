@@ -8,12 +8,14 @@ import Contacts from './Contacts/Contacts';
 
 type ProfilePropsType = {
     profile: ProfilePageType | null
+    status: string
+    updateStatus: (status:string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={styles.main}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             {props.profile
                 ? <Contacts profileContacts={props.profile.contacts}/>
                 : <div className={styles.plug}> Loading </div>}
