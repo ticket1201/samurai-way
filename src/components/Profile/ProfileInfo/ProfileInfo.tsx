@@ -7,6 +7,8 @@ import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 type ProfileInfoType = {
     profile: ProfilePageType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 
@@ -31,7 +33,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                     <h2>{props.profile.fullName}</h2>
                     <p>{props.profile.aboutMe}</p>
                     {props.profile?.lookingForAJob && <p>Ищу работу как: {props.profile?.lookingForAJobDescription}</p>}
-                    <ProfileStatus/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
             </div>
 
