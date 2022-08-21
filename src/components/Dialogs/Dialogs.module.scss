@@ -3,6 +3,7 @@
   display: grid;
   background: aqua;
   grid-template-columns: 2fr 4fr;
+  min-height: calc(100vh - 80px);
 
   & .items {
     background: pink;
