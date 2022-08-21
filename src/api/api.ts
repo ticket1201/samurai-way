@@ -8,24 +8,39 @@ const axiosInstance = axios.create({
     }
 })
 
+export const authAPI = {
+    getAuth: () => {
+        return axiosInstance.get(`auth/me`).then(response => response.data)
+    }
+}
+
 export const usersAPI = {
     getUsers: (currentPage = 1, pageSize = 4) => {
         return axiosInstance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
-    getProfile: (userID: String) => {
-       return  axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
+
+    getProfile: (userID: string) => {
+        console.warn('Deprecated method. Please use profileAPI object.')
+        return profileAPI.getProfile(userID)
     },
-    followUser: (userID: String) => {
+
+    followUser: (userID: string) => {
         return axiosInstance.post(`follow/${userID}`).then(resolve => resolve.data)
     },
-    unfollowUser: (userID: String) => {
+    unfollowUser: (userID: string) => {
         return axiosInstance.delete(`follow/${userID}`).then(resolve => resolve.data)
     }
 }
 
-export const authAPI = {
-    getAuth: () => {
-        return axiosInstance.get(`auth/me`).then(response => response.data)
+export const profileAPI = {
+    getProfile: (userID: string) => {
+        return axiosInstance.get(`profile/` + userID)
+    },
+    getStatus(userID: string) {
+        return axiosInstance.get(`profile/status/` + userID)
+    },
+    updateStatus(status: string) {
+        return axiosInstance.put('profile/status/', {status})
     }
 }
 
