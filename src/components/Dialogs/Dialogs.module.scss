@@ -1,9 +1,10 @@
 
 .dialogs {
+  min-height: calc(100vh - 80px);
   display: grid;
   background: aqua;
   grid-template-columns: 2fr 4fr;
-  min-height: calc(100vh - 80px);
+
 
   & .items {
     background: pink;
@@ -11,11 +12,23 @@
 }
 
 
-.messages {
+.messagesWrapper {
+  box-sizing: border-box;
+  max-height: calc(100vh - 80px);
   display: flex;
   gap: 30px;
   flex-direction: column;
   padding: 30px;
+
+  & .messages {
+    min-height: calc(100vh - 350px);
+    max-width: 715px;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    padding: 30px;
+    overflow-y: scroll;
+  }
 
   .newMessage {
     display: grid;
@@ -27,13 +40,7 @@
               ". . . . button";
 
     & textarea {
-      border-radius: 10px;
       grid-area: text;
-      padding: 10px;
-
-      &:focus {
-        outline: 2px solid orange;
-      }
     }
 
 
