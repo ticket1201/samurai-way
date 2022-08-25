@@ -3,7 +3,6 @@ import {v1} from 'uuid';
 export type DialogsPageType = {
     names: NamesItemType[]
     messages: MessageItemType[]
-    newMessageText: string
 }
 type NamesItemType = {
     id: string
@@ -15,15 +14,8 @@ type MessageItemType = {
     time: string
 }
 
-
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE_NEW_MESSAGE_TEXT'
-    text: string
-}
-type SendMessageTextActionType = {
-    type: 'SEND_MESSAGE'
-}
-export type dialogsReducerActionsTypes = UpdateNewMessageTextActionType | SendMessageTextActionType
+type SendMessageTextActionType = ReturnType<typeof sendMessageActionCreator>
+export type dialogsReducerActionsTypes = SendMessageTextActionType
 
 const initialState: DialogsPageType = {
     names: [
@@ -39,13 +31,10 @@ const initialState: DialogsPageType = {
         {id: v1(), message: 'Wats up?', time: '13:20'},
         {id: v1(), message: '????', time: '13:30'},
     ],
-    newMessageText: ''
 }
 
 export const dialogsReducer = (state = initialState, action: dialogsReducerActionsTypes):DialogsPageType => {
     switch (action.type) {
-        case 'UPDATE_NEW_MESSAGE_TEXT':
-            return {...state, newMessageText: action.text}
         case 'SEND_MESSAGE':
             return {
                 ...state,
@@ -53,19 +42,15 @@ export const dialogsReducer = (state = initialState, action: dialogsReducerActio
                     ...state.messages,
                     {
                         id: v1(),
-                        message: state.newMessageText,
+                        message: action.newMessageText,
                         time: `${new Date().getHours()}:${new Date().getMinutes()}`
                     }],
-                newMessageText: ''
             }
         default:
             return state
     }
 }
 
-export const sendMessageActionCreator = (): SendMessageTextActionType => {
-    return {type: 'SEND_MESSAGE'} as const
-}
-export const updateNewMessageTextActionCreator = (message: string): UpdateNewMessageTextActionType => {
-    return {type: 'UPDATE_NEW_MESSAGE_TEXT', text: message} as const
+export const sendMessageActionCreator = (newMessageText:string) => {
+    return {type: 'SEND_MESSAGE', newMessageText} as const
 }
