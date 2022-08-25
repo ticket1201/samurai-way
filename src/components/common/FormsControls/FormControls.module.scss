@@ -1,0 +1,18 @@
+.textarea{
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+}
+
+.error {
+  border: 2px solid red;
+
+
+  &:focus {
+    outline: 2px solid orange;
+  }
+
+  &Text {
+    color: red;
+  }
+}
