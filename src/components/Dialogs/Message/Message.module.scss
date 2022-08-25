@@ -1,32 +1,29 @@
+.message {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  background: aliceblue;
+  border-radius: 10px;
+  padding: 15px;
 
-
-
-  .message {
-    position: relative;
-    display: flex;
-    gap: 30px;
-    background: aliceblue;
+  & img {
     height: 70px;
-    border-radius: 10px;
-
-    padding: 15px;
-
-    & img{
-      height: 70px;
-      width: 70px;
-      border-radius: 50%;
-    }
-
-    & .text{
-      font-family: Arial ,sans-serif;
-      font-size: 16px;
-      word-wrap: break-word;
-    }
-
-    & .time{
-      position: absolute;
-      right: 30px;
-      bottom: 15px;
-      margin: 0;
-    }
+    width: 70px;
+    border-radius: 50%;
   }
+
+  & .text {
+    max-width: 500px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    word-wrap: anywhere;
+  }
+
+  & .time {
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    margin: 0;
+  }
+}
