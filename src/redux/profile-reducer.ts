@@ -33,29 +33,21 @@ export type ProfilePageType = {
 }
 export type ProfileStateType = {
     posts: PostsType
-    messageForNewPost: string
     profile: ProfilePageType | null
     status: string
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type setUserProfileActionType = ReturnType<typeof setUserProfile>
 type setStatusActionType = ReturnType<typeof setStatus>
 
 export type profileReducerActionsTypes =
     AddPostActionType
-    | UpdateNewTextActionType
     | setUserProfileActionType
     | setStatusActionType
 
 const initialState: ProfileStateType = {
-    messageForNewPost: '',
     posts: [
         {id: v1(), message: 'Hi, how are you?', likeCount: 15},
         {id: v1(), message: 'It\'s my first post', likeCount: 1},
@@ -71,12 +63,10 @@ export const profileReducer = (state = initialState, action: profileReducerActio
         case 'ADD-POST':
             const newPost: PostItemStateType = {
                 id: v1(),
-                message: state.messageForNewPost,
+                message: action.newPostText,
                 likeCount: 0
             }
-            return {...state, posts: [newPost, ...state.posts], messageForNewPost: ''}
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, messageForNewPost: action.newText}
+            return {...state, posts: [newPost, ...state.posts]}
         case 'SET_USER_PROFILE':
             return {...state, profile: {...action.profile}}
         case 'SET_STATUS':
@@ -89,13 +79,11 @@ export const profileReducer = (state = initialState, action: profileReducerActio
 //ACs
 
 
-export const addPostActionCreator = (): AddPostActionType => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
-        type: 'ADD-POST'
-    }
-}
-export const updateNewPostTextActionCreator = (text: string): UpdateNewTextActionType => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: text}
+        type: 'ADD-POST',
+        newPostText
+    } as const
 }
 
 export const setUserProfile = (profile: ProfilePageType) => {
