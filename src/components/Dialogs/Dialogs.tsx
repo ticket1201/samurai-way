@@ -1,8 +1,9 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.scss'
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 import {DialogsPropsType} from './DialogsContainer';
+import AddDialogForm, {AddDialogFormDataType} from './AddDialogForm/AddDialogMessage';
 
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -13,33 +14,21 @@ export const Dialogs = (props: DialogsPropsType) => {
     const messagesElements = props.dialogsPage.messages
         .map(message => <Message message={message.message} time={message.time} key={message.id}/>)
 
-    let newMessageText = props.dialogsPage.newMessageText
 
-    const onClickMessageHandler = () => {
-        if (props.dialogsPage.newMessageText) {
-            props.onSendMessage()
-        }
-
+    const handleSubmit = ({newMessageText}: AddDialogFormDataType) => {
+        props.onSendMessage(newMessageText)
     }
-
-    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value
-        props.updateNewMessageBody(text)
-    }
-
 
     return (
         <div className={s.dialogs}>
             <div className={s.items}>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
-                {messagesElements}
-                <div className={s.newMessage}>
-                    <textarea name="" id="" placeholder={'Enter your message'}
-                              onChange={onChangeMessageHandler} value={newMessageText}></textarea>
-                    <button onClick={onClickMessageHandler}>Send</button>
+            <div className={s.messagesWrapper}>
+                <div className={s.messages}>
+                    {messagesElements}
                 </div>
+                <AddDialogForm onSubmit={handleSubmit}/>
             </div>
         </div>
     );

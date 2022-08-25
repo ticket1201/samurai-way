@@ -1,6 +1,5 @@
 import {
     sendMessageActionCreator,
-    updateNewMessageTextActionCreator
 } from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
@@ -10,8 +9,7 @@ import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 import {ComponentType} from 'react';
 
 type mapDispatchToPropsType = {
-    updateNewMessageBody: (text: string) => void
-    onSendMessage: () => void
+    onSendMessage: (text:string) => void
 }
 
 export type DialogsPropsType = mapDispatchToPropsType & mapStateToPropsType
@@ -25,11 +23,8 @@ const mapStateToProps = (state:AppStateType) => {
 
 const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
     return{
-        updateNewMessageBody: (text:string) => {
-            dispatch(updateNewMessageTextActionCreator(text))
-        },
-        onSendMessage: () => {
-            dispatch(sendMessageActionCreator())
+        onSendMessage: (text:string) => {
+            dispatch(sendMessageActionCreator(text))
         }
     }
 }
