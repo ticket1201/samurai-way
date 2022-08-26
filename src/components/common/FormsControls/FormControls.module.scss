@@ -1,12 +1,17 @@
-.textarea{
+
+.textarea {
   border-radius: 10px;
   padding: 10px;
   resize: none;
 }
 
+.input {
+  border-radius: 3px;
+  padding: 4px;
+}
+
 .error {
   border: 2px solid red;
-
 
   &:focus {
     outline: 2px solid orange;
@@ -14,5 +19,7 @@
 
   &Text {
     color: red;
+    margin: 0;
   }
 }
+
