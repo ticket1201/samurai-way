@@ -1,10 +1,15 @@
 import React from 'react';
 import s from './Navbar.module.scss'
 import {NavLink} from 'react-router-dom';
-import {authType} from '../../../redux/auth-reducer';
 
 
-export const Nav = (props:authType) =>{
+type NavPropsType = {
+    isAuth: boolean
+    login: string | null
+    logout: () => void
+}
+
+export const Nav = (props:NavPropsType) =>{
     return(
         <nav className={s.nav}>
             <NavLink to="/profile" className={s.item} activeClassName={s.active}>Profile</NavLink>
@@ -13,7 +18,9 @@ export const Nav = (props:authType) =>{
             <NavLink to="/music" className={s.item} activeClassName={s.active}>Music</NavLink>
             <NavLink to="/users" className={s.item} activeClassName={s.active}>Users</NavLink>
             <NavLink to="/settings" className={s.item} activeClassName={s.active}>Settings</NavLink>
-            {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+            {props.isAuth
+                ? <div>{props.login} - <button onClick={props.logout}>Logout</button></div>
+                : <NavLink to={'/login'}>Login</NavLink>}
 
         </nav>
     )
