@@ -26,8 +26,7 @@ export const authReducer = (state = initialState, action: authReducerActionsType
         case 'SET_USER_DATA':
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
             }
 
         default :
@@ -37,20 +36,40 @@ export const authReducer = (state = initialState, action: authReducerActionsType
 
 //ACS
 
-export const setAuthUserData = (id: number, email: string, login: string) => {
+export const setAuthUserData = ({id, email, login, isAuth}: authType) => {
     return {
         type: 'SET_USER_DATA',
-        data: {id, email, login}
+        payload: {id, email, login, isAuth}
     } as const
 }
 
 //THUNK
-export const getAuthUserData = () => (dispatch:Dispatch<authReducerActionsTypes>) => {
+export const getAuthUserData = () => (dispatch: Dispatch<authReducerActionsTypes>) => {
     authAPI.getAuth()
         .then(response => {
                 if (response.resultCode === 0) {
                     let {id, email, login} = response.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData({id, email, login, isAuth: true}))
+                }
+            }
+        )
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<authReducerActionsTypes>) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+                if (response.resultCode === 0) {
+                    let {id, email, login} = response.data
+                    dispatch(setAuthUserData({id, email, login, isAuth: true}))
+                }
+            }
+        )
+}
+export const logout = () => (dispatch: Dispatch<authReducerActionsTypes>) => {
+    authAPI.logout()
+        .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setAuthUserData({id: null, email: null, login: null, isAuth: false}))
                 }
             }
         )
