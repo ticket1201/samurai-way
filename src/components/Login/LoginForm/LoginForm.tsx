@@ -9,6 +9,7 @@ export type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    error: string
 }
 
 const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
@@ -26,6 +27,7 @@ const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
                     Remember me
                 </label>
             </div>
+            {props.error && <p className={s.error}>{props.error}</p>}
             <div>
                 <button>Login</button>
             </div>
