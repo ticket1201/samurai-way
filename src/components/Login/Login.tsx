@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm, {FormDataType} from './LoginForm/LoginForm';
+import LoginForm, {LoginFormDataType} from './LoginForm/LoginForm';
 import s from './Login.module.scss'
 import {connect} from 'react-redux';
 import {login} from '../../redux/auth-reducer';
@@ -12,7 +12,7 @@ type LoginPropsType = {
 }
 
 const Login = ({login, isAuth}:LoginPropsType) => {
-    const onSubmit = (formData:FormDataType) => {
+    const onSubmit = (formData:LoginFormDataType) => {
         login(formData.email, formData.password, formData.rememberMe)
     }
 

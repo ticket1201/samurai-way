@@ -5,13 +5,13 @@ import s from '../Login.module.scss'
 import {required} from '../../../utils/validators/validators';
 
 
-export type FormDataType = {
+export type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
 
-const LoginForm = (props: InjectedFormProps<FormDataType>) => {
+const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.loginWrapper}>
             <div>
@@ -33,4 +33,4 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     );
 };
 
-export default reduxForm<FormDataType>({form: 'login'})(LoginForm);
+export default reduxForm<LoginFormDataType>({form: 'login'})(LoginForm);
