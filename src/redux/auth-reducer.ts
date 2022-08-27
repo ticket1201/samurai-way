@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux';
 import {authAPI} from '../api/api';
+import {stopSubmit} from 'redux-form';
 
 export type setUserDataActionCreatorType = ReturnType<typeof setAuthUserData>
 
@@ -55,12 +56,16 @@ export const getAuthUserData = () => (dispatch: Dispatch<authReducerActionsTypes
         )
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<authReducerActionsTypes>) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
                 if (response.resultCode === 0) {
                     let {id, email, login} = response.data
                     dispatch(setAuthUserData({id, email, login, isAuth: true}))
+                }
+                else {
+                    let message = response.messages.length > 0 ? response.messages[0] : 'Some error';
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
             }
         )
