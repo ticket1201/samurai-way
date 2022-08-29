@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/samurai-way/static/css/main.1e87a9a3.css",
+    "main.js": "/samurai-way/static/js/main.c3218435.js",
+    "index.html": "/samurai-way/index.html",
+    "main.1e87a9a3.css.map": "/samurai-way/static/css/main.1e87a9a3.css.map",
+    "main.c3218435.js.map": "/samurai-way/static/js/main.c3218435.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e87a9a3.css",
+    "static/js/main.c3218435.js"
+  ]
+}
