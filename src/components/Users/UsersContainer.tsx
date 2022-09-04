@@ -9,8 +9,14 @@ import {
 import {AppStateType} from '../../redux/redux-store';
 import React, {ComponentType} from 'react';
 import {Users} from './Users';
-import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 import {compose} from 'redux';
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUserCount, getUsersArray
+} from '../../redux/users-selectors';
 
 
 export type mapDispatchToPropsType = {
@@ -45,12 +51,12 @@ class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType> {
 
 const mapStateToProps = (state: AppStateType): UsersType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersArray(state),
+        pageSize: getPageSize(state),
+        totalUserCount: getTotalUserCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -61,8 +67,7 @@ const mapDispatchToProps = {
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect)
+    connect(mapStateToProps, mapDispatchToProps))
 (UsersAPIComponent)
 
 
