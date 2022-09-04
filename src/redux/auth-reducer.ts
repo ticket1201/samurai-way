@@ -46,7 +46,7 @@ export const setAuthUserData = ({id, email, login, isAuth}: authType) => {
 
 //THUNK
 export const getAuthUserData = () => (dispatch: Dispatch<authReducerActionsTypes>) => {
-    authAPI.getAuth()
+    return authAPI.getAuth()
         .then(response => {
                 if (response.resultCode === 0) {
                     let {id, email, login} = response.data
