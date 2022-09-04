@@ -30,7 +30,10 @@ class ProfileContainer extends React.Component<ProfileContainerWithRoutePropsTyp
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = `${this.props.authorizedUserId || 24867}`
+            userId = `${this.props.authorizedUserId }`
+            if(!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -55,4 +58,4 @@ export default compose<ComponentType>(
         getUserProfile, getStatus, updateStatus
     }),
     withRouter,
-    /*withAuthRedirect*/)(ProfileContainer)
+    withAuthRedirect)(ProfileContainer)
