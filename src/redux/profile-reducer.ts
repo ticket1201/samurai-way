@@ -111,24 +111,17 @@ export const deletePostActionCreator = (postId: string) => ({
 
 //THUNK
 
-export const getUserProfile = (userID: string) => (dispatch: Dispatch<profileReducerActionsTypes>) => {
-    usersAPI.getProfile(userID)
-        .then(response => {
-            dispatch(setUserProfile(response.data))
-        })
+export const getUserProfile = (userID: string) => async (dispatch: Dispatch<profileReducerActionsTypes>) => {
+    let response = await usersAPI.getProfile(userID)
+    dispatch(setUserProfile(response.data))
 }
-export const getStatus = (userID: string) => (dispatch: Dispatch<profileReducerActionsTypes>) => {
-    profileAPI.getStatus(userID)
-        .then(response => {
-            dispatch(setStatus(response.data))
-        })
+export const getStatus = (userID: string) => async (dispatch: Dispatch<profileReducerActionsTypes>) => {
+    let response = await profileAPI.getStatus(userID)
+    dispatch(setStatus(response.data))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch<profileReducerActionsTypes>) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-
-                dispatch(setStatus(status))
-            }
-        })
+export const updateStatus = (status: string) => async (dispatch: Dispatch<profileReducerActionsTypes>) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
