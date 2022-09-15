@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {
     follow,
-    followSuccess, getUsers,
+    getUsers,
     setCurrentPage,
-    toggleIsFollowingInProgress, unfollow, unfollowSuccess,
+    unfollow,
     UsersType,
 } from '../../redux/users-reducer';
 import {AppStateType} from '../../redux/redux-store';
@@ -22,27 +22,26 @@ import {
 export type mapDispatchToPropsType = {
     follow: (userID: string) => void
     unfollow: (userID: string) => void
-    followSuccess: (userID: string) => void
-    unfollowSuccess: (userID: string) => void
     setCurrentPage: (page: number) => void
-    toggleIsFollowingInProgress: (isFetching: boolean, userID: string) => void
     getUsers: (currentPage: number, pageSize: number) => void
 }
 type UsersAPIComponentPropsType = mapDispatchToPropsType & UsersType
 
-class UsersAPIComponent extends React.Component<UsersAPIComponentPropsType> {
+class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
 
     render() {
-        return <Users {...this.props} {...mapDispatchToProps}
+        return <Users {...this.props}
                       onPageChanged={this.onPageChanged}
         />
     }
@@ -60,14 +59,10 @@ const mapStateToProps = (state: AppStateType): UsersType => {
     }
 }
 
-const mapDispatchToProps = {
-    followSuccess, unfollowSuccess, setCurrentPage,
-    toggleIsFollowingInProgress, getUsers, follow, unfollow
-
-}
-
-export default compose<ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps))
-(UsersAPIComponent)
+export default compose<ComponentType>(connect(mapStateToProps, {
+        setCurrentPage,
+        getUsers, follow, unfollow
+    })
+)(UsersContainer)
 
 
