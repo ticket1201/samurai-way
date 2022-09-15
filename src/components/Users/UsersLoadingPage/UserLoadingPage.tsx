@@ -10,8 +10,7 @@ export const UserLoadingPage = (props:UsersPropsType) => {
             <UserLoader/>
             <UserLoader/>
             <UserLoader/>
-            <Pagination pageSize={props.pageSize} onPageChanged={props.onPageChanged}
-                        currentPage={props.currentPage} totalUserCount={props.totalUserCount}/>
+            <Pagination {...props}/>
         </>
     );
 };

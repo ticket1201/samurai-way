@@ -8,10 +8,7 @@ import {User} from './User/User';
 export type UsersPropsType = {
     follow: (userID: string) => void
     unfollow: (userID: string) => void
-    followSuccess: (userID: string) => void
-    unfollowSuccess: (userID: string) => void
     onPageChanged: (pageNumber: number) => void
-    toggleIsFollowingInProgress: (isFetching: boolean, userID: string) => void
 } & UsersType
 
 export const Users = (props: UsersPropsType) => {
@@ -27,8 +24,7 @@ export const Users = (props: UsersPropsType) => {
                                 <User {...el} {...props}/>
                             </div>
                         )}
-                        <Pagination pageSize={props.pageSize} onPageChanged={props.onPageChanged}
-                                    currentPage={props.currentPage} totalUserCount={props.totalUserCount}/>
+                        <Pagination {...props}/>
                     </>
 
                 }
