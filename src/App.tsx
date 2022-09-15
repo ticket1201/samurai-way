@@ -1,10 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.scss';
 import {Header} from './components/Header/Header';
-import {Route, withRouter} from 'react-router-dom';
-import {Music} from './components/Music/Music';
-import {News} from './components/News/News';
-import {Settings} from './components/Settings/Settings';
+import {Redirect, Route, withRouter} from 'react-router-dom';
 import Login from './components/Login/Login';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
@@ -25,9 +22,11 @@ class App extends React.Component<AppPropsType> {
     }
 
     render() {
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return (
-                <p>LOADING</p>
+                <div className={'app-wrapper'} style={{justifyContent:'center'}}>
+                    <p>LOADING</p>
+                </div>
             )
         }
 
@@ -35,14 +34,12 @@ class App extends React.Component<AppPropsType> {
             <div className={'app-wrapper'}>
                 <Header/>
                 <div className={'content'}>
+                    <Route path={'/'} render={() => <Redirect to={'/profile'}/>}/>
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/profile/:userId?'}
                            render={() => <ProfileContainer/>}/>
                     <Route path={'/users'}
                            render={() => <UsersContainer/>}/>
-                    <Route path={'/news'} render={() => <News/>}/>
-                    <Route path={'/music'} render={() => <Music/>}/>
-                    <Route path={'/settings'} render={() => <Settings/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                 </div>
             </div>
@@ -51,7 +48,7 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-const mapSateToProps = (state:AppStateType) => ({
+const mapSateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
