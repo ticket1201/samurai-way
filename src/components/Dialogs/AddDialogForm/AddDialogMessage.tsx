@@ -9,10 +9,9 @@ export type AddDialogFormDataType = {
 }
 
 
-const AddDialogForm = (props: InjectedFormProps<AddDialogFormDataType>) => {
-
+const AddDialogForm = ({handleSubmit}: InjectedFormProps<AddDialogFormDataType>) => {
     return (
-        <form className={s.newMessage} onSubmit={props.handleSubmit}>
+        <form className={s.newMessage} onSubmit={handleSubmit}>
             <Field className={s.textarea} component={TextArea} name="newMessageText"
                    placeholder={'Enter your message'} validate={[required]}/>
             <button>Send</button>

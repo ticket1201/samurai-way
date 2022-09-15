@@ -10,31 +10,33 @@ type UserPropsType = {
     unfollow: (userID: string) => void
 } & UserType
 
-export const User = (props: UserPropsType) => {
+export const User = ({
+                         name, status, followed, photos, followingInProgress, follow, unfollow, ...props
+                     }: UserPropsType) => {
     return (
         <>
             <div className={s.ImageWrapper}>
                 <NavLink to={`/profile/${props.id}`}>
-                    <img src={props.photos.small || defaultAvatar} alt="Avatar"/>
+                    <img src={photos.small || defaultAvatar} alt="Avatar"/>
                 </NavLink>
-                {props.followed
-                    ? <button disabled={props.followingInProgress.some(id => id === props.id)}
+                {followed
+                    ? <button disabled={followingInProgress.some(id => id === props.id)}
                               onClick={() => {
-                                  props.unfollow(props.id)
+                                  unfollow(props.id)
                               }}>
                         Unfollow
                     </button>
-                    : <button disabled={props.followingInProgress.some(id => id === props.id)}
+                    : <button disabled={followingInProgress.some(id => id === props.id)}
                               onClick={() => {
-                                  props.follow(props.id)
+                                  follow(props.id)
                               }}>
                         Follow
                     </button>}
             </div>
             <NavLink className={s.userInfo} to={`/profile/${props.id}`}>
                 <div className={s.userTitle}>
-                    <h3>{props.name}</h3>
-                    <p>{props.status}</p>
+                    <h3>{name}</h3>
+                    <p>{status}</p>
                 </div>
                 <div className={s.userLocation}>
                     <h3>{`country`},</h3>

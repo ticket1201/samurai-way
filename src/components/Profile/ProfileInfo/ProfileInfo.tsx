@@ -12,15 +12,15 @@ type ProfileInfoType = {
 }
 
 
-export const ProfileInfo = (props: ProfileInfoType) => {
+export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoType) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return (
             <ProfileInfoLoader/>
         )
     }
 
-    const isLookingForJobStyle = props.profile?.lookingForAJob ? s.lookingForJob : '';
+    const isLookingForJobStyle = profile?.lookingForAJob ? s.lookingForJob : '';
 
     return (
         <div className={s.profileInfo}>
@@ -28,12 +28,13 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
                 alt="Landscape"/>
             <div className={s.profileMain}>
-                <img className={`${isLookingForJobStyle} ${s.image}`} src={props.profile.photos.small || defaultAvatar} alt="Avatar"/>
+                <img className={`${isLookingForJobStyle} ${s.image}`} src={profile.photos.small || defaultAvatar}
+                     alt="Avatar"/>
                 <div className={s.profileMainDescription}>
-                    <h2>{props.profile.fullName}</h2>
-                    <p>{props.profile.aboutMe}</p>
-                    {props.profile?.lookingForAJob && <p>Ищу работу как: {props.profile?.lookingForAJobDescription}</p>}
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    <h2>{profile.fullName}</h2>
+                    <p>{profile.aboutMe}</p>
+                    {profile?.lookingForAJob && <p>Ищу работу как: {profile?.lookingForAJobDescription}</p>}
+                    <ProfileStatus status={status} updateStatus={updateStatus}/>
                 </div>
             </div>
 

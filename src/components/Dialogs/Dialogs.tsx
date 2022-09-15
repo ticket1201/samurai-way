@@ -6,17 +6,17 @@ import {DialogsPropsType} from './DialogsContainer';
 import AddDialogForm, {AddDialogFormDataType} from './AddDialogForm/AddDialogMessage';
 
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = ({dialogsPage, onSendMessage}: DialogsPropsType) => {
 
-    const dialogsElements = props.dialogsPage.names
+    const dialogsElements = dialogsPage.names
         .map(dialog => <DialogItem name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
-    const messagesElements = props.dialogsPage.messages
+    const messagesElements = dialogsPage.messages
         .map(message => <Message message={message.message} time={message.time} key={message.id}/>)
 
 
     const handleSubmit = ({newMessageText}: AddDialogFormDataType) => {
-        props.onSendMessage(newMessageText)
+        onSendMessage(newMessageText)
     }
 
     return (

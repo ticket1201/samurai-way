@@ -6,12 +6,12 @@ type PaginationPropsType = {
     totalUserCount: number
     pageSize: number
     currentPage: number
-    onPageChanged: (pageNumber:number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
-export const Pagination = (props: PaginationPropsType) => {
+export const Pagination = ({totalUserCount, pageSize, currentPage, onPageChanged}: PaginationPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+    let pagesCount = Math.ceil(totalUserCount / pageSize)
     let pages: Array<number> = []
 
     for (let i = 1; i <= pagesCount; i++) {
@@ -20,9 +20,9 @@ export const Pagination = (props: PaginationPropsType) => {
 
     return (
         <div className={s.pagination}>
-            {pages.map((p,i )=> {
-                return <span key={i} className={props.currentPage === p ? s.selected : ''}
-                             onClick={() => props.onPageChanged(p)}>{p}</span>
+            {pages.map((p, i) => {
+                return <span key={i} className={currentPage === p ? s.selected : ''}
+                             onClick={() => onPageChanged(p)}>{p}</span>
             })}
         </div>
     )

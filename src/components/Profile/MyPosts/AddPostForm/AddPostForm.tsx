@@ -11,10 +11,10 @@ export type AddPostFormDataType = {
 const maxLength30 = maxLengthCreator(30)
 
 
-const AddPostForm = (props: InjectedFormProps<AddPostFormDataType>) => {
+const AddPostForm = ({handleSubmit}: InjectedFormProps<AddPostFormDataType>) => {
 
     return (
-        <form className={s.addPost} onSubmit={props.handleSubmit}>
+        <form className={s.addPost} onSubmit={handleSubmit}>
             <Field component={TextArea} name="newPostText" placeholder={'Enter your post text'} validate={[required, maxLength30]}/>
             <button>Submit</button>
         </form>

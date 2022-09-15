@@ -12,12 +12,12 @@ type ProfilePropsType = {
     updateStatus: (status:string) => void
 }
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = ({profile, status, updateStatus}: ProfilePropsType) => {
     return (
         <div className={styles.main}>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            {props.profile
-                ? <Contacts profileContacts={props.profile.contacts}/>
+            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
+            {profile
+                ? <Contacts profileContacts={profile.contacts}/>
                 : <div className={styles.plug}> Loading </div>}
             <MyPostsContainer/>
         </div>

@@ -8,17 +8,17 @@ type DialogPropsType = {
 }
 
 
-export const DialogItem = (props: DialogPropsType) => {
-    let path = `/dialogs/${props.id}`;
+export const DialogItem = ({id, name}: DialogPropsType) => {
+    let path = `/dialogs/${id}`;
     let isActive = () => {
-        return props.id.toString() === path[path.length] ? `${s.link} ${s.active}` : `${s.link}`;
+        return id.toString() === path[path.length] ? `${s.link} ${s.active}` : `${s.link}`;
     }
 
     return (
         <div className={s.item}>
             <img src="https://html5css.ru/howto/img_avatar.png" alt="Avatar"/>
             <NavLink to={path} className={isActive}>
-                {props.name}
+                {name}
             </NavLink>
         </div>
     );
