@@ -12,9 +12,23 @@ export type LoginFormDataType = {
     error: string
 }
 
-const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
+const LoginForm = ({handleSubmit, error}: InjectedFormProps<LoginFormDataType>) => {
     return (
-        <form onSubmit={props.handleSubmit} className={s.loginWrapper}>
+        <form onSubmit={handleSubmit} className={s.loginWrapper}>
+            <div className={s.text}>
+                <p>If you are using Safari</p>
+                <p>please disable Cross-Origin Restrictions</p>
+                <p>{`Preferences >> Advanced, and select`}</p>
+                <p>'Disable Cross-Origin Restrictions'</p>
+                <p>To log in get registered
+                    <a href={'https://social-network.samuraijs.com/'}
+                       target={'_blank'} rel="noreferrer"> here
+                    </a>
+                </p>
+                <p>or use common test account credentials:</p>
+                <p>Email: free@samuraijs.com</p>
+                <p>Password: free</p>
+            </div>
             <div>
                 <Field type="text" placeholder={'Email'} name={'email'} component={Input} validate={[required]}/>
             </div>
@@ -27,7 +41,7 @@ const LoginForm = (props: InjectedFormProps<LoginFormDataType>) => {
                     Remember me
                 </label>
             </div>
-            {props.error && <p className={s.error}>{props.error}</p>}
+            {error && <p className={s.error}>{error}</p>}
             <div>
                 <button>Login</button>
             </div>
