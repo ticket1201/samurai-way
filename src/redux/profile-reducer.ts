@@ -46,6 +46,8 @@ export type profileReducerActionsTypes =
     AddPostActionType
     | setUserProfileActionType
     | setStatusActionType
+    | ReturnType<typeof deletePostActionCreator>
+
 
 const initialState: ProfileStateType = {
     posts: [
@@ -71,6 +73,8 @@ export const profileReducer = (state = initialState, action: profileReducerActio
             return {...state, profile: {...action.profile}}
         case 'SET_STATUS':
             return {...state, status: action.status}
+        case 'DELETE_POST':
+            return {...state, posts: state.posts.filter(el => el.id !== action.postId)}
         default :
             return state
     }
@@ -99,6 +103,11 @@ export const setStatus = (status: string) => {
         status
     } as const
 }
+
+export const deletePostActionCreator = (postId: string) => ({
+    type: 'DELETE_POST',
+    postId
+}) as const
 
 //THUNK
 
