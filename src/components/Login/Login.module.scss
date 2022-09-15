@@ -8,10 +8,14 @@
 .loginWrapper{
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
 .error{
   margin: 0;
   color: red;
+}
+.text{
+  text-align: center;
 }
