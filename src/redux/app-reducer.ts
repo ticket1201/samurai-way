@@ -18,7 +18,7 @@ export const appReducer = (state = initialState, action: AppActionType) => {
 }
 
 
-const setInitializedAC = () => ({
+export const setInitializedAC = () => ({
     type: 'SET_INITIALIZE_SUCCESS'
 } as const)
 
