@@ -22,7 +22,6 @@ const Login = ({login, isAuth}:LoginPropsType) => {
 
     return (
         <div className={s.wrapper}>
-            <h1>Login</h1>
             <LoginForm onSubmit={onSubmit}/>
         </div>
     );
