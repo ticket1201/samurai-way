@@ -1,8 +1,10 @@
 # Wake the f*** Up Samurai, we have a city to burn!
 
-Установить все зависимости из package.json:
+Social network app based on React, Redux, React-router-dom v.5, TypeScript, SCSS.
+
+## Install packages from package.json:
 ### `yarn`
 
-а потом запустите проект:
+## To run project:
 ### `yarn start`
 
