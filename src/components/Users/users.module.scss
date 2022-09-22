@@ -6,9 +6,13 @@
 
 .pagination{
   width: 800px;
-  overflow-x: scroll;
   padding: 5px 0;
   margin: 10px auto;
+  text-align: center;
+  & .numbers{
+    display: inline-block;
+    width: 540px;
+  }
   & span{
     cursor: pointer;
     margin: 5px;
@@ -32,6 +36,7 @@
   gap: 15px;
 
   .userInfoPlug{
+    height: 111px;
     width: 100%;
     padding: 20px;
     display: grid;
