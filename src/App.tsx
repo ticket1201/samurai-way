@@ -34,17 +34,38 @@ class App extends React.Component<AppPropsType> {
             <div className={'app-wrapper'}>
                 <Header/>
                 <div className={'content'}>
-                    <Route path={'/'} render={() => <Redirect to={'/profile'}/>}/>
-                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                    <Route path={'/'} render={() => {
+                        return (
+                            <React.Suspense fallback={<Preloader/>}>
+                                <Redirect to={'/profile'}/>
+                            </React.Suspense>)
+                    }}/>
+                    <Route path={'/dialogs'} render={() => {
+                        return (
+                            <React.Suspense fallback={<Preloader/>}>
+                                <DialogsContainer/>
+                            </React.Suspense>)
+                    }}/>
                     <Route path={'/profile/:userId?'}
-                           render={() => <ProfileContainer/>}/>
+                           render={() => {
+                               return (
+                                   <React.Suspense fallback={<Preloader/>}>
+                                       <ProfileContainer/>
+                                   </React.Suspense>)
+                           }}/>
                     <Route path={'/users'}
-                           render={() => <UsersContainer/>}/>
+                           render={() => {
+                               return (
+                                   <React.Suspense fallback={<Preloader/>}>
+                                       <UsersContainer/>
+                                   </React.Suspense>)
+                           }}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                 </div>
             </div>
 
-        );
+        )
+            ;
     }
 }
 
