@@ -17,7 +17,7 @@ export const Users = (props: UsersPropsType) => {
             <h2 className={s.pageTitle}>Users</h2>
             <div className={s.usersWrapper}>
                 {props.isFetching
-                    ? <UserLoadingPage {...props}/>
+                    ? <UserLoadingPage/>
                     : <>
                         {props.users.map(el =>
                             <div key={el.id} className={s.user}>
