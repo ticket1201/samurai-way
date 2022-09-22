@@ -1,15 +1,17 @@
 import React, {ComponentType} from 'react';
-import './App.scss';
-import {Header} from './components/Header/Header';
-import {Redirect, Route, withRouter} from 'react-router-dom';
-import Login from './components/Login/Login';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import UsersContainer from './components/Users/UsersContainer';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {Redirect, Route, withRouter} from 'react-router-dom';
+import './App.scss';
 import {AppStateType} from './redux/redux-store';
 import {initializeAppTC} from './redux/app-reducer';
+import {Header} from './components/Header/Header';
+import Login from './components/Login/Login';
+import Preloader from './components/common/Preloader/Preloader';
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
 
 type AppPropsType = ReturnType<typeof mapSateToProps> & {
@@ -24,9 +26,7 @@ class App extends React.Component<AppPropsType> {
     render() {
         if (!this.props.initialized) {
             return (
-                <div className={'app-wrapper'} style={{justifyContent:'center'}}>
-                    <p>LOADING</p>
-                </div>
+                <Preloader/>
             )
         }
 
