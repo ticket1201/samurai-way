@@ -7,18 +7,25 @@ import Contacts from './Contacts/Contacts';
 
 
 type ProfilePropsType = {
-    profile: ProfilePageType | null
+    profile: ProfilePageType
     status: string
-    updateStatus: (status:string) => void
+    updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: (data: ProfilePageType) => Promise<any>
+    isOwner: boolean
 }
 
-export const Profile = ({profile, status, updateStatus}: ProfilePropsType) => {
+export const Profile = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfilePropsType) => {
     return (
         <div className={styles.main}>
-            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
-            {profile
-                ? <Contacts profileContacts={profile.contacts}/>
-                : <div className={styles.plug}> Loading </div>}
+            {
+                Object.keys(profile).length &&
+                <ProfileInfo isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}
+                             savePhoto={savePhoto}
+                             saveProfile={saveProfile}
+                />
+            }
+            {Object.keys(profile).length && <Contacts profile={profile}/>}
             <MyPostsContainer/>
         </div>
     )
