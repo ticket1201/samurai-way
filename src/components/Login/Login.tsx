@@ -8,12 +8,13 @@ import {AppStateType} from '../../redux/redux-store';
 
 type LoginPropsType = {
     isAuth: boolean
-    login: (email: string, password: string, rememberMe: boolean) => void
+    captchaUrl?: string
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
-const Login = ({login, isAuth}:LoginPropsType) => {
+const Login = ({login, isAuth, captchaUrl}:LoginPropsType) => {
     const onSubmit = (formData:LoginFormDataType) => {
-        login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if(isAuth){
@@ -22,14 +23,15 @@ const Login = ({login, isAuth}:LoginPropsType) => {
 
     return (
         <div className={s.wrapper}>
-            <LoginForm onSubmit={onSubmit}/>
+            <LoginForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
         </div>
     );
 };
 
 
 const mapStateToProps = (state:AppStateType) =>({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {login})(Login)
