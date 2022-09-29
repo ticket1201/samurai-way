@@ -9,10 +9,11 @@ export type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
     error: string
 }
 
-const LoginForm = ({handleSubmit, error}: InjectedFormProps<LoginFormDataType>) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}: InjectedFormProps<LoginFormDataType, {captchaUrl:string | undefined}> & {captchaUrl:string | undefined}) => {
     return (
         <form onSubmit={handleSubmit} className={s.loginWrapper}>
             <div className={s.text}>
@@ -41,6 +42,10 @@ const LoginForm = ({handleSubmit, error}: InjectedFormProps<LoginFormDataType>) 
                     Remember me
                 </label>
             </div>
+            {captchaUrl && <img src={captchaUrl} alt={'captcha'}/>}
+            {captchaUrl && <div>
+                <Field type="text" placeholder={'Captcha'} name={'captcha'} component={Input} validate={[required]}/>
+            </div>}
             {error && <p className={s.error}>{error}</p>}
             <div>
                 <button>Login</button>
@@ -49,4 +54,4 @@ const LoginForm = ({handleSubmit, error}: InjectedFormProps<LoginFormDataType>) 
     );
 };
 
-export default reduxForm<LoginFormDataType>({form: 'login'})(LoginForm);
+export default reduxForm<LoginFormDataType, {captchaUrl:string | undefined}>({form: 'login'})(LoginForm);
