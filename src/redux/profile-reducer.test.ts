@@ -1,6 +1,6 @@
 import {
     addPostActionCreator,
-    deletePostActionCreator,
+    deletePostActionCreator, ProfilePageType,
     profileReducer,
     ProfileStateType,
     setStatus, setUserProfile
@@ -15,7 +15,7 @@ beforeEach(()=> {
             {id: '231321', message: 'It\'s my first post', likeCount: 1},
             {id: '12312312', message: 'Hey ho lets go', likeCount: 1}
         ],
-        profile: null,
+        profile: {} as ProfilePageType,
         status: '',
     }
 

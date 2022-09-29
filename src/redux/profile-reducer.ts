@@ -1,6 +1,8 @@
 import {v1} from 'uuid';
 import {profileAPI, usersAPI} from '../api/api';
 import {Dispatch} from 'redux';
+import {AppStateType, AppThunk} from './redux-store';
+import {stopSubmit} from 'redux-form';
 
 export type PostsType = PostItemStateType[]
 export type PostItemStateType = {
@@ -9,6 +11,7 @@ export type PostItemStateType = {
     likeCount: number
 }
 export type ProfileContactsType = {
+    [key: string]: any
     facebook: string
     website: string
     vk: string
@@ -33,7 +36,7 @@ export type ProfilePageType = {
 }
 export type ProfileStateType = {
     posts: PostsType
-    profile: ProfilePageType | null
+    profile: ProfilePageType
     status: string
 }
 
@@ -47,6 +50,7 @@ export type profileReducerActionsTypes =
     | setUserProfileActionType
     | setStatusActionType
     | ReturnType<typeof deletePostActionCreator>
+    | ReturnType<typeof savePhotoSuccess>
 
 
 const initialState: ProfileStateType = {
@@ -55,7 +59,7 @@ const initialState: ProfileStateType = {
         {id: v1(), message: 'It\'s my first post', likeCount: 1},
         {id: v1(), message: 'Hey ho lets go', likeCount: 1}
     ],
-    profile: null,
+    profile: {} as ProfilePageType,
     status: '',
 }
 
@@ -73,6 +77,8 @@ export const profileReducer = (state = initialState, action: profileReducerActio
             return {...state, profile: {...action.profile}}
         case 'SET_STATUS':
             return {...state, status: action.status}
+        case 'SAVE_PHOTO_SUCCESS':
+            return  {...state, profile: {...state.profile, photos: action.photos}}
         case 'DELETE_POST':
             return {...state, posts: state.posts.filter(el => el.id !== action.postId)}
         default :
@@ -109,6 +115,11 @@ export const deletePostActionCreator = (postId: string) => ({
     postId
 }) as const
 
+export const savePhotoSuccess = (photos: ProfilePhotosType) => ({
+    type: 'SAVE_PHOTO_SUCCESS',
+    photos
+}) as const
+
 //THUNK
 
 export const getUserProfile = (userID: string) => async (dispatch: Dispatch<profileReducerActionsTypes>) => {
@@ -123,5 +134,23 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch<profil
     let response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+export const savePhoto = (file: File) => async (dispatch: Dispatch<profileReducerActionsTypes>) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+export const saveProfile = (data: ProfileContactsType):AppThunk<Promise<any>> => async (dispatch, getState:()=>AppStateType) => {
+    const userId = getState().auth.id
+    let response = await profileAPI.saveProfile(data)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId!.toString()))
+    }
+    else{
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+        dispatch(stopSubmit('contacts', {_error: message}))
+        return Promise.reject()
     }
 }
