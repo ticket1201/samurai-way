@@ -17,16 +17,18 @@ type ProfilePropsType = {
 
 export const Profile = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfilePropsType) => {
     return (
-        <div className={styles.main}>
+        <>
             {
-                Object.keys(profile).length &&
-                <ProfileInfo isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}
-                             savePhoto={savePhoto}
-                             saveProfile={saveProfile}
-                />
-            }
-            {Object.keys(profile).length && <Contacts profile={profile}/>}
-            <MyPostsContainer/>
-        </div>
+                (Object.keys(profile).length !== 0) && (
+                    <div className={styles.main}>
+                        <ProfileInfo isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}
+                                     savePhoto={savePhoto}
+                                     saveProfile={saveProfile}
+                        />
+                        <Contacts profile={profile}/>
+                        <MyPostsContainer/>
+                    </div>
+                )}
+        </>
     )
 }
