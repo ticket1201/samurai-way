@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ProfileContactsType} from '../redux/profile-reducer';
 
 const axiosInstance = axios.create({
     withCredentials: true,
@@ -47,6 +48,18 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return axiosInstance.put('profile/status/', {status})
+    },
+    savePhoto(file: File) {
+        const formData = new FormData();
+        formData.append('image', file)
+        return axiosInstance.put('profile/photo/', formData, {
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfile(data: ProfileContactsType) {
+        return axiosInstance.put('profile/', data)
     }
 }
 
