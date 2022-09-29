@@ -1,26 +1,25 @@
 import React from 'react';
-import s from './contacts.module.scss';
-import {ProfileContactsType} from '../../../redux/profile-reducer';
-import {LinkDisplay} from '../../common/LinkDisplay';
+import s from './Contacts.module.scss';
+import {ProfilePageType} from '../../../redux/profile-reducer';
 
 type ContactsPropsType = {
-    profileContacts: ProfileContactsType
+    profile: ProfilePageType
 }
 
 
-const Contacts = ({profileContacts}: ContactsPropsType) => {
+const Contacts = ({profile}: ContactsPropsType) => {
+
+    let links = Object.keys({...profile.contacts}).map(key => {
+        return profile.contacts[key] && <div key={key}><p>{key}: <a href={profile.contacts[key]} target={'_blank'} rel="noreferrer">{key}</a></p> </div>
+    })
+    if(links.every((el) => el === null)){
+        links = [<p>User has no contacts</p>]
+    }
     return (
         <div className={s.contacts}>
             <h3>Contacts:</h3>
             <div className={s.contactsLinks}>
-                {profileContacts.facebook && <LinkDisplay link={profileContacts.facebook} name={'Facebook'}/>}
-                {profileContacts.website && <LinkDisplay link={profileContacts.website} name={'WebSite'}/>}
-                {profileContacts.vk && <LinkDisplay link={profileContacts.vk} name={'VK'}/>}
-                {profileContacts.twitter && <LinkDisplay link={profileContacts.twitter} name={'Twitter'}/>}
-                {profileContacts.instagram && <LinkDisplay link={profileContacts.instagram} name={'Instagram'}/>}
-                {profileContacts.youtube && <LinkDisplay link={profileContacts.youtube} name={'YouTube'}/>}
-                {profileContacts.github && <LinkDisplay link={profileContacts.github} name={'GitHub'}/>}
-                {profileContacts.mainLink && <LinkDisplay link={profileContacts.mainLink} name={'Main Link'}/>}
+                {links}
             </div>
         </div>
     );
