@@ -3,9 +3,18 @@
   grid-template-areas:
     "info info info info"
     "contacts posts posts posts";
-  background-color: lightblue;
   width: inherit;
   align-items: center;
+  gap: 30px;
+
+  @media screen and (max-width: 810px){
+    grid-template-areas:
+    "info info info info"
+    "contacts contacts contacts contacts"
+    "posts posts posts posts";
+    grid-template-columns: 0 1fr 1fr 0;
+  }
+
 }
 
 .main img {

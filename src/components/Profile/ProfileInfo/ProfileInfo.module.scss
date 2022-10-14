@@ -1,35 +1,82 @@
-.profileInfo{
+.profileInfo {
   grid-area: info;
   width: inherit;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding-bottom: 30px;
+  box-shadow: 0 0 21.5px 0 rgba(0, 0, 0, 0.1);
+
+  & img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
 }
 
-.profileMain{
+.profileMain {
   display: flex;
   margin-left: 20%;
+  gap: 40px;
 
-  .lookingForJob{
+  @media screen {
+    @media (max-width: 900px) {
+      margin: 0;
+      justify-content: center;
+      grid-template-columns: 0 1fr 1fr 0;
+    }
+    @media (max-width: 800px) {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+  }
+
+  & .imgWrapper {
+    position: relative;
+
+    & input {
+      display: none;
+    }
+
+    & button {
+      position: absolute;
+      top: 50px;
+      left: 75px;
+
+      width: 31px;
+      height: 31px;
+      border: 0;
+      border-radius: 50%;
+      font-weight: bold;
+      box-shadow: 0 0 4px 0 #343434;
+    }
+  }
+
+  .lookingForJob {
     border: 5px solid lightgreen;
   }
 
-  & .image{
+  & .image {
     width: 101px;
     height: 101px;
     position: relative;
     top: -30px;
-    margin: 0 30px;
-    border: 5px solid lightblue;
+    border: 5px solid #ffffff;
     border-radius: 50%;
     background: lightgray;
 
   }
-  &Description{
-    & p{
+
+  &Description {
+    & p {
       font-style: italic;
       margin: 3px 0;
     }
-    &Plug{
+
+    &Plug {
       width: 265px;
-      & div{
+
+      & div {
         width: 160px;
         height: 20px;
         margin: 10px 0;
@@ -39,7 +86,7 @@
   }
 }
 
-.blink{
+.blink {
   animation: blink-2 2s infinite;
 }
 
