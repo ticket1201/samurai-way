@@ -11,9 +11,9 @@ let state:ProfileStateType
 beforeEach(()=> {
     state = {
         posts: [
-            {id: '123123', message: 'Hi, how are you?', likeCount: 15},
-            {id: '231321', message: 'It\'s my first post', likeCount: 1},
-            {id: '12312312', message: 'Hey ho lets go', likeCount: 1}
+            {id: '1234', name: 'July Jill', time: '12:35', message: 'Hi, how are you?', likeCount: 15},
+            {id: '3211', name: 'John Dory', time: '09:10', message: 'It\'s my first post', likeCount: 1},
+            {id: '2133', name: 'Tony Thompson', time: '01:08', message: 'Hey ho lets go', likeCount: 1}
         ],
         profile: {} as ProfilePageType,
         status: '',
@@ -23,14 +23,14 @@ beforeEach(()=> {
 
 
 test('new post should be added', () => {
-    let action = addPostActionCreator('test test')
+    let action = addPostActionCreator('one', 'test test', '13:22')
     let newState = profileReducer(state,action);
     expect(newState.posts.length).toBe(4)
     expect(newState.posts[0].message).toBe('test test')
 })
 
 test('post should be deleted', () => {
-    let action = deletePostActionCreator('123123')
+    let action = deletePostActionCreator('1234')
     let newState = profileReducer(state,action);
     expect(newState.posts.length).toBe(2)
     expect(newState.posts[0].message).toBe('It\'s my first post')

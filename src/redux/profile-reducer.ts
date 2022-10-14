@@ -2,11 +2,13 @@ import {v1} from 'uuid';
 import {profileAPI, usersAPI} from '../api/api';
 import {Dispatch} from 'redux';
 import {AppStateType, AppThunk} from './redux-store';
-import {stopSubmit} from 'redux-form';
+import {reset, stopSubmit} from 'redux-form';
 
 export type PostsType = PostItemStateType[]
 export type PostItemStateType = {
     id: string
+    name: string
+    time: string
     message: string
     likeCount: number
 }
@@ -55,9 +57,9 @@ export type profileReducerActionsTypes =
 
 const initialState: ProfileStateType = {
     posts: [
-        {id: v1(), message: 'Hi, how are you?', likeCount: 15},
-        {id: v1(), message: 'It\'s my first post', likeCount: 1},
-        {id: v1(), message: 'Hey ho lets go', likeCount: 1}
+        {id: v1(), name: 'July Jill', time: '12:35', message: 'Hi, how are you?', likeCount: 15},
+        {id: v1(), name: 'John Dory', time: '09:10', message: 'It\'s my first post', likeCount: 1},
+        {id: v1(), name: 'Tony Thompson', time: '01:08', message: 'Hey ho lets go', likeCount: 1}
     ],
     profile: {} as ProfilePageType,
     status: '',
@@ -68,8 +70,8 @@ export const profileReducer = (state = initialState, action: profileReducerActio
     switch (action.type) {
         case 'ADD-POST':
             const newPost: PostItemStateType = {
+                ...action.payload,
                 id: v1(),
-                message: action.newPostText,
                 likeCount: 0
             }
             return {...state, posts: [newPost, ...state.posts]}
@@ -89,10 +91,10 @@ export const profileReducer = (state = initialState, action: profileReducerActio
 //ACs
 
 
-export const addPostActionCreator = (newPostText: string) => {
+export const addPostActionCreator = (name:string, message: string, time: string) => {
     return {
         type: 'ADD-POST',
-        newPostText
+        payload: {name, message, time}
     } as const
 }
 
@@ -153,4 +155,11 @@ export const saveProfile = (data: ProfileContactsType):AppThunk<Promise<any>> =>
         dispatch(stopSubmit('contacts', {_error: message}))
         return Promise.reject()
     }
+}
+
+export const addPostTC = (message:string):AppThunk => (dispatch, getState:() => AppStateType) => {
+    const login = getState().auth.login || 'unknown'
+    const time = new Date().toLocaleTimeString()
+    dispatch(addPostActionCreator(login, message, time))
+    dispatch(reset('postAddMessage'))
 }
