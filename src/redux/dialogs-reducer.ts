@@ -21,12 +21,9 @@ export type dialogsReducerActionsTypes = SendMessageTextActionType
 
 const initialState: DialogsPageType = {
     names: [
-        {id: v1(), name: 'Dimych'},
-        {id: v1(), name: 'Sanya'},
+        {id: v1(), name: 'Dmitry'},
+        {id: v1(), name: 'Aleksander'},
         {id: v1(), name: 'Olya'},
-        {id: v1(), name: 'Valera'},
-        {id: v1(), name: 'Valera'},
-        {id: v1(), name: 'Viktor'},
     ],
     messages: [
         {id: v1(), message: 'Hey', time: '13:15'},
