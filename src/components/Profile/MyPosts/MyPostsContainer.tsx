@@ -1,11 +1,11 @@
 import {
-    addPostActionCreator,
+    addPostTC,
     PostsType,
 } from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../../redux/redux-store';
-import {Dispatch} from 'redux';
+import {AppActionsType, AppStateType} from '../../../redux/redux-store';
+import {ThunkDispatch} from 'redux-thunk';
 
 
 type mapStateToPropsType = {
@@ -24,10 +24,10 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, AppActionsType>): mapDispatchToPropsType => {
     return {
         addPost: (text: string) => {
-            dispatch(addPostActionCreator(text))
+            dispatch(addPostTC(text))
         }
     }
 }

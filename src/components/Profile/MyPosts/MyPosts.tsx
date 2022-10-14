@@ -9,7 +9,7 @@ export class MyPosts extends React.PureComponent<MyPostsPropsType> {
     render() {
 
         const postsElements = this.props.posts
-            .map(post => <Post message={post.message} likeCount={post.likeCount} key={post.id}/>)
+            .map(post => <Post name={post.name} time={post.time} message={post.message} likeCount={post.likeCount} key={post.id}/>)
 
         const handleSubmit = ({newPostText}: AddPostFormDataType) => {
             this.props.addPost(newPostText)
@@ -17,9 +17,11 @@ export class MyPosts extends React.PureComponent<MyPostsPropsType> {
 
         return (
             <div className={s.posts}>
-                <h3>My posts</h3>
-                <AddPostForm onSubmit={handleSubmit}/>
-                <div className={'posts'}>
+                <div className={s.addPostWrapper}>
+                    <h3>My posts</h3>
+                    <AddPostForm onSubmit={handleSubmit}/>
+                </div>
+                <div className={s.postsItemsWrapper}>
                     {postsElements}
                 </div>
             </div>
