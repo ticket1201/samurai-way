@@ -1,45 +1,69 @@
 .item{
-    position: relative;
-    min-height: 180px;
-    width: 740px;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: lightsalmon;
     display: flex;
+    flex-direction: column;
     justify-content: stretch;
-    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 22px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 21.5px 0 rgba(0, 0, 0, 0.1);
 
+  & img{
+      border-radius: 50%;
+      height: 45px;
+      width: auto;
+  }
 }
 
-.item img{
-    border-radius: 50%;
-    height: 150px;
-    width: auto;
-    padding: 20px;
+.title{
+    display: flex;
+    gap: 15px;
+    & .nameTimeWrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+    }
+    & p{
+        margin: 0;
+    }
+    & .name{
+        font-weight: bold;
+    }
 }
 
 .message{
-    background-color: lightyellow;
-    border-radius: 15px;
-    min-width: 55%;
-    min-height: 100px;
-    padding: 15px;
-}
+    position: relative;
+    width: 100%;
+    min-height: 55px;
+    & p{
+        font-family: Georgia, sans-serif;
+        font-size: 1em;
+        margin-left: 10px;
+    }
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -20px;
+        right: -20px;
+        border: 1px solid #fafafb;
+    }
 
-.message p{
-    font-family: Georgia, sans-serif;
-    font-size: 1em;
+    &:after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border: 1px solid #fafafb;
+    }
 }
 
 .likes{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
     width: fit-content;
-    padding: 12px 8px;
-    background-color: lightskyblue;
-    border-radius: 7px;
+    align-self: flex-end;
+    margin-top: 10px;
     font-family: Georgia, sans-serif;
     font-weight: bold;
     cursor: pointer;
