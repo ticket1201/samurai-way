@@ -23,7 +23,7 @@ beforeEach(() => {
 
 
 test('message should be sent', () => {
-    let action = sendMessageActionCreator('wow')
+    let action = sendMessageActionCreator('hey', 'wow', '12:22')
     let newState = dialogsReducer(state, action)
     expect(newState.messages[3].message).toBe('wow')
     expect(newState.messages.length).toBe(4)

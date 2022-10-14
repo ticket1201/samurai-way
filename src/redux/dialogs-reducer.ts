@@ -1,4 +1,6 @@
 import {v1} from 'uuid';
+import {AppStateType, AppThunk} from './redux-store';
+import {reset} from 'redux-form';
 
 export type DialogsPageType = {
     names: NamesItemType[]
@@ -42,8 +44,7 @@ export const dialogsReducer = (state = initialState, action: dialogsReducerActio
                     ...state.messages,
                     {
                         id: v1(),
-                        message: action.newMessageText,
-                        time: `${new Date().getHours()}:${new Date().getMinutes()}`
+                        ...action.payload
                     }],
             }
         default:
@@ -51,6 +52,12 @@ export const dialogsReducer = (state = initialState, action: dialogsReducerActio
     }
 }
 
-export const sendMessageActionCreator = (newMessageText:string) => {
-    return {type: 'SEND_MESSAGE', newMessageText} as const
+export const sendMessageActionCreator = (login:string, message:string, time:string) => {
+    return {type: 'SEND_MESSAGE', payload: {login, message, time}} as const
+}
+export const sendMessageTC = (message:string):AppThunk => (dispatch, getState:() => AppStateType) => {
+    const login = getState().auth.login as string
+    const time = `${new Date().getHours()}:${new Date().getMinutes()}`
+    dispatch(sendMessageActionCreator(login, message, time))
+    dispatch(reset('dialogAddMessage'))
 }
