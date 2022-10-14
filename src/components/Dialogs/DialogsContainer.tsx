@@ -1,12 +1,13 @@
 import {
-    sendMessageActionCreator,
+    sendMessageTC
 } from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
-import {compose, Dispatch} from 'redux';
+import {AppActionsType, AppStateType} from '../../redux/redux-store';
+import {compose} from 'redux';
 import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 import {ComponentType} from 'react';
+import {ThunkDispatch} from 'redux-thunk';
 
 type mapDispatchToPropsType = {
     onSendMessage: (text:string) => void
@@ -21,10 +22,10 @@ const mapStateToProps = (state:AppStateType) => {
     }
 }
 
-const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch:ThunkDispatch<AppStateType, unknown, AppActionsType>):mapDispatchToPropsType => {
     return{
         onSendMessage: (text:string) => {
-            dispatch(sendMessageActionCreator(text))
+            dispatch(sendMessageTC(text))
         }
     }
 }
