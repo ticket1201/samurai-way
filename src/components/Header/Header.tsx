@@ -5,9 +5,7 @@ import NavBarContainer from './Navbar/NavBarContainer';
 export const Header = () => {
     return(
         <header className={s.header}>
-            <div className={s.img}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Playstation_logo_colour.svg" alt="logo"/>
-            </div>
+            <div className={s.img}></div>
             <NavBarContainer/>
         </header>
     )
