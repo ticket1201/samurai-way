@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import defaultAvatar from './../../../assets/images/default_avatar.png'
 import s from './ProfileInfo.module.scss'
 import {ProfilePageType} from '../../../redux/profile-reducer';
@@ -18,6 +18,7 @@ type ProfileInfoType = {
 
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}: ProfileInfoType) => {
     let [editMode, setEditMode] = useState(false)
+    const inRef = useRef<HTMLInputElement>(null);
 
     if (!profile) {
         return (
@@ -43,9 +44,12 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                 src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
                 alt="Landscape"/>
             <div className={s.profileMain}>
-                <img className={`${isLookingForJobStyle} ${s.image}`} src={profile.photos.small || defaultAvatar}
-                     alt="Avatar"/>
-                {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+                <div className={s.imgWrapper}>
+                    <img className={`${isLookingForJobStyle} ${s.image}`} src={profile.photos.small || defaultAvatar}
+                         alt="Avatar"/>
+                    {isOwner && <button onClick={() => inRef && inRef.current && inRef.current.click()}>+</button>}
+                    {isOwner && <input type={'file'} ref={inRef} onChange={onMainPhotoSelected}/>}
+                </div>
                 <div className={s.profileMainDescription}>
                     {!editMode
                         ? <>
