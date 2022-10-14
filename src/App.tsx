@@ -35,6 +35,7 @@ class App extends React.Component<AppPropsType> {
                     </React.Suspense>
                     <Route path={'/users'} render={() => <UsersContainer/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
+                  {/*  <Route path={'*'} render={() => <div>404</div>}/>*/}
                 </div>
             </div>
 
