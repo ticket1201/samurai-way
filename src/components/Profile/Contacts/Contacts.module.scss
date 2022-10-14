@@ -1,19 +1,28 @@
 .contacts{
   grid-area: contacts;
   align-self: start;
-  margin: 15px 25px;
-  min-width: 240px;
+  min-width: 180px;
+  background-color: #ffffff;
+  padding: 10px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 21.5px 0 rgba(0, 0, 0, 0.1);
+
+  & h3{
+    margin: 10px 0;
+  }
 
   & .contactsLinks{
     display: grid;
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 0 15px;
     & p{
       font-weight: bold;
 
       & a{
         margin-left: 10px;
+        color: #9c989c;
+        text-decoration: none;
+        &:visited{
+          color: #9c989c;
+        }
       }
     }
   }

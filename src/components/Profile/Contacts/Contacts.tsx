@@ -17,7 +17,7 @@ const Contacts = ({profile}: ContactsPropsType) => {
     }
     return (
         <div className={s.contacts}>
-            <h3>Contacts:</h3>
+            <h3>Contacts</h3>
             <div className={s.contactsLinks}>
                 {links}
             </div>
