@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   gap: 20px;
   grid-area: header;
-  padding: 30px;
+  padding: 45px 30px;
 
   @media screen {
     @media (max-width: 780px) {
@@ -14,11 +15,22 @@
     }
   }
 
-  & img {
+  & .img {
+    width: 180px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    background-image: url("./../../assets/images/logo.svg");
+
     @media screen {
       @media (max-width: 780px) {
+        height: 30px;
+        align-self: flex-end;
+      }
+      @media (max-width: 520px) {
         width: 60px;
-        height: auto;
+        background-image: url("./../../assets/images/logo-small.svg");
       }
     }
   }
