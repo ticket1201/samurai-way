@@ -8,6 +8,8 @@ export const UserLoadingPage = () => {
             <UserLoader/>
             <UserLoader/>
             <UserLoader/>
+            <UserLoader/>
+            <UserLoader/>
         </>
     );
 };
