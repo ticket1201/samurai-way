@@ -27,4 +27,19 @@
     bottom: 15px;
     margin: 0;
   }
+
+  @media (max-width: 530px) {
+    gap: 10px;
+    & img {
+      height: 30px;
+      width: 30px;
+    }
+    & .text {
+      margin: 0;
+    }
+    & .time {
+      right: 15px;
+      bottom: 5px;
+    }
+  }
 }
