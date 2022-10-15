@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect, Provider} from 'react-redux';
-import {HashRouter, Redirect, Route} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.scss';
 import {AppStateType, store} from './redux/redux-store';
 import {initializeAppTC} from './redux/app-reducer';
@@ -25,20 +25,21 @@ class App extends React.Component<AppPropsType> {
         }
 
         return (
-            <div className={'app-wrapper'}>
-                <Header/>
-                <div className={'content'}>
-                    <Route path={'/'} exact render={() => <Redirect to={'/profile'}/>}/>
-                    <React.Suspense fallback={<Preloader/>}>
-                        <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                        <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                    </React.Suspense>
-                    <Route path={'/users'} render={() => <UsersContainer/>}/>
-                    <Route path={'/login'} render={() => <Login/>}/>
-                  {/*  <Route path={'*'} render={() => <div>404</div>}/>*/}
+            <Switch>
+                <Route path={'/login'} render={() => <Login/>}/>
+                <div className={'app-wrapper'}>
+                    <Header/>
+                    <div className={'content'}>
+                        <Route path={'/'} exact render={() => <Redirect to={'/profile'}/>}/>
+                        <React.Suspense fallback={<Preloader/>}>
+                            <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                            <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
+                            <Route path={'/users'} render={() => <UsersContainer/>}/>
+                        </React.Suspense>
+                        {/*  <Route path={'*'} render={() => <div>404</div>}/>*/}
+                    </div>
                 </div>
-            </div>
-
+            </Switch>
         )
     }
 }
