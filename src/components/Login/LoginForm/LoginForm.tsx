@@ -21,7 +21,8 @@ const LoginForm = ({handleSubmit, error, captchaUrl}: InjectedFormProps<LoginFor
                 <p>please disable Cross-Origin Restrictions</p>
                 <p>{`Preferences >> Advanced, and select`}</p>
                 <p>'Disable Cross-Origin Restrictions'</p>
-                <p>To log in get registered
+                <p>
+                    <span>To log in get registered </span>
                     <a href={'https://social-network.samuraijs.com/'}
                        target={'_blank'} rel="noreferrer"> here
                     </a>
