@@ -10,21 +10,23 @@
     @media (max-width: 780px) {
       flex-direction: row;
       gap: 10px;
-      &:last-child{
+      &:last-child {
         position: relative;
-        &:after{
+
+        &:after {
           display: none;
         }
       }
-      &:before{
+      &:before {
         display: none;
       }
     }
   }
 
-  &:last-child{
+  &:last-child {
     position: relative;
-    &:after{
+
+    &:after {
       content: '';
       position: absolute;
       left: -15px;
@@ -34,7 +36,7 @@
     }
   }
 
-  &:before{
+  &:before {
     content: '';
     position: absolute;
     top: -10px;
@@ -62,6 +64,57 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+  }
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  width: 145px;
+  color: #ffffff;
+  margin-top: 10px;
+  align-self: center;
+
+  & span{
+    margin-right: 5px;
+  }
+
+  & button {
+    cursor: pointer;
+    color: #424242;
+    padding: 2px 6px;
+    background-color: #e3e7f7;
+    border-width: 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.17);
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  @media screen {
+    @media (max-width: 780px) {
+      margin-top: 0;
+      & button {
+        position: relative;
+        top: 1px;
+      }
+    }
+    @media (max-width: 500px) {
+      & button {
+        top: 0;
+      }
+    }
+
+    @media (max-width: 410px) {
+
+      width: fit-content;
+      & span {
+        display: none;
+      }
+    }
   }
 }
 

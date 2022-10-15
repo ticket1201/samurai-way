@@ -15,9 +15,7 @@ export const Nav = ({isAuth, login, logout}:NavPropsType) =>{
             <NavLink to="/profile" className={s.item} activeClassName={s.active}>Profile</NavLink>
             <NavLink to="/dialogs" className={s.item} activeClassName={s.active}>Message</NavLink>
             <NavLink to="/users" className={s.item} activeClassName={s.active}>Users</NavLink>
-            {isAuth
-                ? <div>{login} - <button onClick={logout}>Logout</button></div>
-                : <NavLink to={'/login'}>Login</NavLink>}
+            {isAuth && <div className={s.account}><span>{login} </span><button onClick={logout}>Logout</button></div>}
         </nav>
     )
 }
