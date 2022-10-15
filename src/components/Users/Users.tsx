@@ -13,7 +13,7 @@ export type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
     return (
-        <>
+        <div className={s.usersMain}>
             <h2 className={s.pageTitle}>Users</h2>
             <div className={s.usersWrapper}>
                 {props.isFetching
@@ -26,8 +26,7 @@ export const Users = (props: UsersPropsType) => {
                         )}
                         <Pagination {...props}/>
                     </>
-
                 }
             </div>
-        </>)
+        </div>)
 }

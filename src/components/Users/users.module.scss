@@ -1,52 +1,88 @@
-.pageTitle{
-  margin: 25px 13%;
-
+.pageTitle {
+  margin-bottom: 15px;
 }
 
-
-.pagination{
-  width: 800px;
-  padding: 5px 0;
-  margin: 10px auto;
-  text-align: center;
-  & .numbers{
-    display: inline-block;
-    width: 540px;
-  }
-  & span{
-    cursor: pointer;
-    margin: 5px;
-  }
-  & .selected{
-    font-weight: bold;
-  }
+.usersMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .usersWrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-}
+  display: grid;
+  grid-template-areas:
+        "user user user"
+        "user user user"
+        "pagination pagination pagination";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 50px;
+  gap: 25px;
 
-.user {
-  width: 1000px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-
-  .userInfoPlug{
-    height: 111px;
-    width: 100%;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    border: 2px solid lightgray;
-    border-radius: 15px;
+  @media screen {
+    @media (max-width: 1210px) {
+      grid-template-areas:
+        "user user"
+        "user user"
+        "user user"
+        "pagination pagination";
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 72px;
+    }
+    @media (max-width: 560px) {
+      grid-template-areas:
+        "user"
+        "user"
+        "user"
+        "user"
+        "user"
+        "user"
+        "pagination";
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 120px;
+      justify-items: center;
+    }
   }
 }
 
-.blink{
+.user {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 21.5px 0 rgba(0, 0, 0, 0.1);
+
+  @media screen {
+    @media (max-width: 860px) {
+      width: 230px;
+      & .imgPlug {
+        width: 230px;
+      }
+    }
+  }
+
+  & .imgPlug {
+    width: 100%;
+    height: 250px;
+    background-color: #e3e3e3;
+    border-radius: 15px 15px 0 0;
+  }
+
+  &:hover {
+    animation: hoverUp 0.5s linear;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.3);
+
+    & .ImageWrapper {
+      opacity: 0.86;
+    }
+  }
+
+}
+
+
+.blink {
   animation: blink-2 2s infinite;
 }
 
@@ -62,83 +98,143 @@
   }
 }
 
+@keyframes hoverUp {
+  0% {
+    box-shadow: 0 0 21.5px 0 rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
 .ImageWrapper {
-  width: 200px;
+  width: 100%;
+
+  & img {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+  }
+}
+
+.userInfo {
+  padding: 0 15px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  & img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-  }
-  & .imgPlug{
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: lightgray;
-  }
-  & .btnPlug{
-    width: 55px;
-    height: 21px;
-    border-radius: 5px;
-    background: lightgray;
-  }
-
-}
-
-.userInfo{
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  border: 2px solid lightslategrey;
-  border-radius: 15px;
   color: black;
-  text-decoration: none ;
+  text-decoration: none;
 
-  &Plug{
-    border: 2px solid lightgray;
+  & .userTitlePlug {
+    align-self: center;
+    border-radius: 5px;
+    margin: 15px;
+    width: 150px;
+    height: 26px;
+    background-color: #e3e3e3;
   }
 
-  & .userTitle{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-
-    &Plug{
-      width: 150px;
-      height: 20px;
-      background: lightgray;
-      border-radius: 5px;
-    }
-
-    & h3{
-      margin: 0;
-    }
-    & p{
-      margin: 0;
-    }
-
-
-
+  & h3 {
+    text-align: center;
   }
-
-  & .userLocation{
-    text-align: right;
-    & h3{
-      margin: 10px 0;
-    }
-    & .userLocationPlug{
-      height: 20px;
-      margin: 10px 0;
-      background: lightgray;
-      border-radius: 5px;
-    }
-  }
-
 }
 
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-evenly;
 
+  .btnPug {
+    width: 75px;
+    height: 22px;
+    background-color: #e3e3e3;
+    border-radius: 15px;
+    margin: 5px 0;
+  }
+
+  & button {
+    cursor: pointer;
+    color: #424242;
+    padding: 5px 18px;
+    background-color: #e3e7f7;
+    border-width: 0;
+    border-radius: 13px;
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  & .follow {
+    color: white;
+    background-color: #277ce1;
+    border-width: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 18px rgba(54, 110, 255, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+  }
+}
+
+.pagination {
+  grid-area: pagination;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  padding: 5px;
+  margin: 10px auto;
+  text-align: center;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.17);
+  @media (max-width: 860px) {
+    max-width: 340px;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .nums {
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  & button {
+    cursor: pointer;
+    color: #424242;
+    padding: 5px 18px;
+    margin: 0 3px;
+    background-color: #e3e7f7;
+    border-width: 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.17);
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: 0 3px 13px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  & .numbers {
+    display: inline-block;
+    @media (max-width: 860px) {
+        order: -1;
+    }
+  }
+
+  & span {
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  & .selected {
+    font-weight: bold;
+  }
+}

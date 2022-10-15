@@ -17,6 +17,7 @@ import {
     getPageSize,
     getTotalUserCount, getUsersArray
 } from '../../redux/users-selectors';
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 
 
 export type mapDispatchToPropsType = {
@@ -62,7 +63,7 @@ const mapStateToProps = (state: AppStateType): UsersType => {
 export default compose<ComponentType>(connect(mapStateToProps, {
         setCurrentPage,
         getUsers, follow, unfollow
-    })
+    }),  withAuthRedirect
 )(UsersContainer)
 
 
