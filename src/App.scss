@@ -19,7 +19,6 @@
     }
   }
 
-
   & .content {
     grid-area: content;
     border-radius: 20px;
@@ -30,12 +29,18 @@
     z-index: 1;
     @media screen {
       @media (max-width: 780px) {
-        margin: 5px 30px;
+        margin: 5px 30px 15px;
+      }
+      @media (max-width: 780px) {
+        margin: 10px;
       }
     }
   }
 }
 
+.login{
+  background-color: #9c989c;
+}
 
 h2 {
   font-size: 1.75rem;
