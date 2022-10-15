@@ -29,18 +29,25 @@ export const Pagination = ({totalUserCount, pageSize, currentPage, onPageChanged
 
     return (
         <div className={s.pagination}>
-            <button onClick={() => setPortionNumber(1)} disabled={portionNumber > 0 && portionNumber <= 1}>first</button>
-            <button onClick={() => setPortionNumber((p) => p - 1)} disabled={portionNumber > 0 && portionNumber <= 1}>pred</button>
+            <div className={s.buttonsWrapper}>
+                <button onClick={() => setPortionNumber(1)} disabled={portionNumber > 0 && portionNumber <= 1}>first
+                </button>
+                <button onClick={() => setPortionNumber((p) => p - 1)}
+                        disabled={portionNumber > 0 && portionNumber <= 1}>pred
+                </button>
+            </div>
             <span className={s.numbers}>
                  {pages
                      .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                      .map((p) => {
-                         return <span key={p} className={currentPage === p ? s.selected : ''}
+                         return <span key={p} className={currentPage === p ? s.selected : s.nums}
                                       onClick={() => onPageChanged(p)}>{p}</span>
                      })}
             </span>
-            <button onClick={() => setPortionNumber((p) => p + 1)} disabled={portionsCont === portionNumber}>next</button>
-            <button onClick={() => setPortionNumber(portionsCont)} disabled={portionsCont === portionNumber}>last</button>
+            <div className={s.buttonsWrapper}>
+                <button onClick={() => setPortionNumber((p) => p + 1)} disabled={portionsCont === portionNumber}>next</button>
+                <button onClick={() => setPortionNumber(portionsCont)} disabled={portionsCont === portionNumber}>last</button>
+            </div>
         </div>
     )
 };
