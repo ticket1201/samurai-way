@@ -11,6 +11,11 @@
   padding: 30px;
   border-radius: 15px;
   background-color: #f1f5f8;
+  @media screen {
+    @media (max-width: 480px) {
+      width: 280px;
+    }
+  }
 }
 
 .loginWrapper {
