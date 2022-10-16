@@ -20,26 +20,29 @@ class App extends React.Component<AppPropsType> {
     render() {
         if (!this.props.initialized) {
             return (
-                <Preloader/>
+                <Preloader onContent={false}/>
             )
         }
 
         return (
-            <Switch>
-                <Route path={'/login'} render={() => <Login/>}/>
-                <div className={'app-wrapper'}>
-                    <Header/>
-                    <div className={'content'}>
-                        <Route path={'/'} exact render={() => <Redirect to={'/profile'}/>}/>
-                        <React.Suspense fallback={<Preloader/>}>
-                            <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                            <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                            <Route path={'/users'} render={() => <UsersContainer/>}/>
-                        </React.Suspense>
-                        {/*  <Route path={'*'} render={() => <div>404</div>}/>*/}
-                    </div>
-                </div>
-            </Switch>
+            <>
+                <Switch>
+                    <Route path={'/login'} render={() => <Login/>}/>
+                    <>
+                        <div className={'app-wrapper'}>
+                            <Header/>
+                            <div className={'content'}>
+                                <Route path={'/'} exact render={() => <Redirect to={'/profile'}/>}/>
+                                <React.Suspense fallback={<Preloader onContent={true}/>}>
+                                    <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
+                                    <Route path={'/users'} render={() => <UsersContainer/>}/>
+                                </React.Suspense>
+                            </div>
+                        </div>
+                    </>
+                </Switch>
+            </>
         )
     }
 }
