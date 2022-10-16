@@ -13,7 +13,7 @@ const Contacts = ({profile}: ContactsPropsType) => {
         return profile.contacts[key] && <div key={key}><p>{key}: <a href={profile.contacts[key]} target={'_blank'} rel="noreferrer">{key}</a></p> </div>
     })
     if(links.every((el) => el === null)){
-        links = [<p>User has no contacts</p>]
+        links = [<p key={'1'}>User has no contacts</p>]
     }
     return (
         <div className={s.contacts}>
