@@ -1,9 +1,15 @@
 import React from 'react';
 
-const Preloader = () => {
+type PropsType = {
+    onContent: boolean
+}
+
+const Preloader = ({onContent}: PropsType) => {
+    const onContentStyle = onContent ? 'loader onContent': 'loader';
+
     return (
-        <div className={'app-wrapper'} style={{justifyContent: 'center', alignItems:'center'}}>
-            <p>LOADING</p>
+        <div className={'loader_wrapper'}>
+            <div className={onContentStyle}></div>
         </div>
     );
 };
